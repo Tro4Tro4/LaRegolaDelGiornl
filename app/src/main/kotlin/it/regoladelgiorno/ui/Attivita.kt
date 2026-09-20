@@ -45,8 +45,12 @@ data class StatoUi(
     ),
     val osservazione: Boolean = false,
     /** Valore iniziale sensato: a 0 la schermata mostrerebbe il 1 gennaio 1970
-     *  per la frazione di secondo che precede la lettura delle impostazioni. */
-    val giornoLogico: Long = LocalDate.now().toEpochDay()
+     *  per la frazione di secondo che precede la lettura delle impostazioni.
+     *  Passa da Tempo come tutto il resto: il confine vero non e' ancora noto,
+     *  si assume mezzanotte, e un istante dopo lo sostituisce quello letto. */
+    val giornoLogico: Long = Tempo.giornoLogico(
+        Instant.now(), ZoneId.systemDefault(), LocalTime.MIDNIGHT
+    )
 )
 
 class ModelloRegola(app: Application) : AndroidViewModel(app) {

@@ -169,6 +169,7 @@ solo ciò che era da aprire e chiude solo ciò che è già scaduto.
 ## 5. Verifiche eseguite
 
 **99 test**, compilati con Kotlin 2.1 ed eseguiti, non solo scritti.
+Dopo la revisione successiva sono 111.
 
 **27 mutanti su 27 uccisi.** Il mutation testing ha trovato cose che il
 RED-first non avrebbe trovato: RED-first prova che un test fallisce una volta,
@@ -214,6 +215,54 @@ sarebbero stati letti due volte da uno screen reader.
 stringhe esistevano inutilizzate: l'app sarebbe rimasta in italiano anche
 tradotta.
 
+### Difetti trovati nella revisione successiva
+
+La logica di dominio ha retto: nessun difetto nel `:core`. Tutto quanto segue
+stava nella cintura Android, mai eseguita, o negli strumenti di verifica.
+
+**`POST_NOTIFICATIONS` non veniva mai richiesto.** Era dichiarato nel manifest e
+controllato prima di ogni `notify()`, ma nessuno lo chiedeva all'utente. Da API
+33 non è concesso all'installazione: su ogni telefono moderno l'app sarebbe
+rimasta muta per sempre, senza un errore in log, e con lei sarebbe sparito il
+canale su cui è costruita.
+
+**`allowBackup` era `true`.** Il backup automatico avrebbe copiato lo storico su
+Google Drive, mentre l'interfaccia dice in due punti che niente esce dal
+dispositivo. L'assenza di `INTERNET` rende vera quella frase per l'app, non per
+il sistema che la ospita.
+
+**`rispondi()` poteva ribaltare la risposta dell'utente.** Ricalcolava la
+baseline al momento della risposta, e la baseline si muove. Riprodotto: l'app
+chiede perché il contapassi non sa, l'utente risponde «sì», e si vede registrare
+il «no» del contapassi. Il commento nel codice affermava l'opposto, e nessun test
+lo copriva perché tutti usavano uno storico immobile.
+
+**La rete di sicurezza guardava solo ieri, e chiudeva in silenzio.** Due giorni
+di app ferma bastavano a lasciare aperti per sempre i giorni precedenti, fuori
+dallo storico valutato e fuori dalla mediana. E archiviava senza mai porre la
+domanda della sera, proprio sui dispositivi per cui esiste, registrando come
+«nessuna risposta» un silenzio che nessuno aveva chiesto di rompere. Da qui
+`MotivoIgnoto.MAI_CHIESTO` e `core/Recupero.kt`, che porta nel core la decisione
+su quali giorni chiudere e a chi chiedere: nel worker non sarebbe verificabile
+senza un emulatore.
+
+**Tre mutanti su venticinque non si applicavano più.** Lo script ne dichiarava
+ventisette; ne conteneva venticinque, e tre cercavano frammenti che il codice non
+conteneva più — due erano rimasti indietro quando il codice morto era stato
+tolto, il terzo cercava una riga mai esistita. Lo script li segnalava come
+`ERRORE` e proseguiva senza fallire, quindi la cifra «27 su 27» non era mai stata
+smentita da nessuno. Ora lo script fallisce se un mutante sopravvive o non si
+applica.
+
+**Un mutante sopravvissuto.** Riparando il primo dei tre è emerso che nessun test
+copriva l'ultimo gradino del rilassamento dei vincoli, quello in cui resta solo
+il cooldown: il ciclo poteva fermarsi un gradino prima e servire una regola che
+stava ancora riposando. Il caso mancava, ed è stato aggiunto.
+
+**Il glifo `←` non è nel font.** Il sottoinsieme mappa 327 codepoint e non
+include `U+2190`. L'unico comando di ritorno dello storico cade sul fallback di
+sistema, con peso e allineamento diversi da Literata. Non ancora risolto.
+
 ### Una decisione ribaltata
 
 Avevo ripiegato sul maiuscolo con spaziatura temendo che la feature OpenType
@@ -233,7 +282,7 @@ sottoinsiemando Literata a mano. Il maiuscoletto è vero.
 | Catalogo | 37 KB |
 | Font | 76 KB (da 955 KB) |
 | Test | 99 |
-| Mutanti | 27/27 |
+| Mutanti | 33 dichiarati |
 | Contrasto | 21:1 testo, 5,74:1 tenue chiaro, 6,44:1 tenue scuro |
 
 ---

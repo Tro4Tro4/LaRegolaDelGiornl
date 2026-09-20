@@ -212,6 +212,29 @@ internal fun testSelezione() {
         }
         vero(storico.map { it.regolaId }.toSet().size > 60, "troppa ripetizione complessiva")
     }
+    test("quando resta solo il cooldown, il cooldown regge comunque") {
+        // Tutte le regole libere sono della categoria di ieri: i vincoli su
+        // categoria e intensita' devono cadere, ma quello sul cooldown no.
+        // E' l'ultimo gradino del rilassamento, e senza questo caso nessuno lo
+        // percorre: il ciclo potrebbe fermarsi un gradino prima e servire
+        // proprio la regola che sta riposando.
+        val catalogo = listOf(
+            Regola("s1", "Oggi telefona a chi avresti scritto.", Categoria.SOCIALE, Livello.DICHIARATA),
+            Regola("s2", "Oggi mangia con qualcuno invece che da solo.", Categoria.SOCIALE, Livello.DICHIARATA),
+            Regola("f1", "Oggi cammina venti minuti senza destinazione.", Categoria.FISICO, Livello.DICHIARATA)
+        )
+        val base = giorno("2026-03-02")
+        for (d in 0 until 30) {
+            val g = base + d
+            val storico = listOf(
+                VoceStorico(g - 1, "s0", Categoria.SOCIALE, 1),  // ieri era sociale
+                VoceStorico(g - 2, "f1", Categoria.FISICO, 1)    // f1 usata l'altro ieri
+            )
+            val scelta = Selezione.scegli(g, salt, catalogo, storico)
+            vero(scelta.id != "f1", "giorno $g: servita una regola ancora in cooldown")
+        }
+    }
+
     test("regola feriale mai servita di domenica") {
         val soloFeriali = catalogoFinto(40).map { it.copy(contesto = Contesto.FERIALE) } +
             regolaSemplice.copy(id = "zzz", contesto = Contesto.QUALSIASI)

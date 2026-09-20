@@ -5,7 +5,9 @@ Tutto locale: nessun account, nessuna rete, nessuna telemetria.
 
 L'assenza del permesso `INTERNET` nel manifest è verificabile da chiunque
 scarichi l'APK, ed è l'unica prova credibile che l'app non mandi niente da
-nessuna parte.
+nessuna parte. Per lo stesso motivo `allowBackup` è `false`: con il backup
+automatico lo storico finirebbe su Google Drive, e la frase che l'app mostra
+all'utente sarebbe falsa.
 
 ---
 
@@ -13,7 +15,7 @@ nessuna parte.
 
 | | |
 |---|---|
-| Logica di dominio | 99 test, 27 mutanti uccisi su 27 |
+| Logica di dominio | 111 test, 33 mutanti dichiarati |
 | Catalogo | 150 regole validate, simulate su tre anni d'uso |
 | Layer Android | scritto, **mai compilato** |
 | Interfaccia Compose | scritta, **mai compilata** |
@@ -42,7 +44,7 @@ docs/
 ```
 
 La separazione non è estetica. `:core` non può dipendere da Android per
-costruzione, ed è il motivo per cui 99 test girano in un secondo senza
+costruzione, ed è il motivo per cui 111 test girano in un secondo senza
 emulatore. Se qualcuno ci aggiunge una dipendenza Android, il modulo smette
 di compilare — effetto voluto.
 
@@ -79,6 +81,12 @@ per scriverci dentro.
 - `res/mipmap/ic_launcher` — generalo con Image Asset di Android Studio
 - Il wrapper Gradle
 - La riga di CI che rigenera il catalogo e fallisce se il diff non è vuoto
+- La riga di CI che lancia `strumenti/mutazioni.py`: ora lo script esce con
+  codice diverso da zero se un mutante sopravvive **o se non si applica**, e un
+  mutante che non si applica è il modo in cui una suite si svuota in silenzio —
+  tre lo erano diventati, e nessuno se n'era accorto
+- Il glifo `←` di `torna_a_oggi` non è nel font sottoinsiemato: cade sul
+  fallback di sistema, con peso e allineamento diversi da Literata
 
 `strumenti/regole.py` produce **due** artefatti che devono restare allineati:
 il JSON spedito e lo specchio Kotlin che i test validano. Senza quel

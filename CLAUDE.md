@@ -9,10 +9,10 @@ Non caricarlo salvo che serva: qui sotto c'è ciò che non si deduce dal codice.
 ## Comandi
 
 ```bash
-./gradlew :core:test            # 99 test, gira senza SDK Android
+./gradlew :core:test            # 111 test, gira senza SDK Android
 ./gradlew :app:assembleDebug
 python3 strumenti/regole.py     # rigenera il catalogo (due artefatti)
-KOTLINC=<percorso> KOTLIN_STDLIB=<percorso> python3 strumenti/mutazioni.py 0 27
+KOTLINC=<percorso> KOTLIN_STDLIB=<percorso> python3 strumenti/mutazioni.py
 ```
 
 ## Metodo di lavoro richiesto
@@ -35,7 +35,7 @@ architetturale invece di continuare a rattoppare.
 
 ## Invarianti — non violare
 
-**`:core` non può dipendere da Android.** È il motivo per cui 99 test girano in
+**`:core` non può dipendere da Android.** È il motivo per cui 111 test girano in
 un secondo senza emulatore. Niente `Flow`, niente `Context`, niente androidx.
 Se serve osservare dati, il posto è `OsservatoreGiorni` nel modulo `app`.
 
@@ -50,17 +50,44 @@ di sicurezza e verrà "corretto": un receiver con `intent-filter` per broadcast
 di sistema non viene raggiunto se è `false`, e il fallimento è silenzioso. Le
 quattro azioni sono protected broadcast, solo il sistema può inviarle.
 
+**Il permesso delle notifiche si chiede all'avvio.** Da API 33
+`POST_NOTIFICATIONS` non è concesso all'installazione, e `notify()` non segnala
+nulla quando manca: senza la richiesta l'app resta muta per sempre, in silenzio,
+e con lei sparisce il canale su cui è costruita. Si chiede senza preamboli, al
+contrario dell'osservazione automatica: quella è una lettura di sensori e va
+spiegata prima, questa è l'app stessa.
+
+**`allowBackup="false"`.** Sembra una dimenticanza e verrà "corretto". Con il
+backup automatico lo storico finirebbe su Google Drive, e la frase «niente esce
+dal dispositivo», che l'app mostra all'utente in due punti, sarebbe falsa. Il
+costo accettato è ripartire da zero cambiando telefono.
+
 **Allarmi inesatti.** Mai `USE_EXACT_ALARM`: Google Play la riserva a sveglie e
 calendari, e pubblicarla senza qualificarsi fa rifiutare l'app.
 
-**La selezione è deterministica.** Nessun `Random` da nessuna parte: stesso
-giorno più stesso salt danno sempre la stessa regola. Serve a rendere la logica
-testabile e a impedire di "ritirare i dadi".
+**La selezione è deterministica.** Nessun `Random` dentro `:core`: stesso giorno
+più stesso salt danno sempre la stessa regola. Serve a rendere la logica
+testabile e a impedire di "ritirare i dadi". L'unico sorteggio dell'app è il
+salt, estratto una volta sola alla prima apertura in `DepositoImpostazioni`:
+è quello che rende diversa la sequenza fra due installazioni, e sta fuori dalla
+selezione proprio per non renderla imprevedibile.
 
 **Solo `Tempo.kt` deriva una data da un istante.** Nessun `LocalDate.now()`
 altrove. Il confine del giorno è configurabile e tocca tre cose insieme: il
 passaggio nello storico, la finestra di misura dei passi, e a quale giorno
 appartiene una risposta data dopo mezzanotte.
+
+**Una risposta data non si rivaluta.** `rispondi()` non ricalcola nulla: la
+baseline si muove, e un giorno precedente chiuso in ritardo ne fa nascere una che
+al momento della domanda non esisteva. Rivalutare significa registrare il «no»
+del contapassi a chi ha risposto «sì» a una domanda posta proprio perché il
+contapassi non sapeva. Chi ha già deciso decide; se nessuno ha deciso, vale la
+risposta.
+
+**`MAI_CHIESTO` non è `NESSUNA_RISPOSTA`.** Il primo dice che l'app non stava
+girando quando sarebbe stato il momento di chiedere, il secondo che l'utente ha
+scelto di non rispondere. Confonderli attribuisce all'utente un silenzio che non
+gli appartiene e falsa la composizione.
 
 **Il testo della regola è copiato nello storico**, non referenziato per id.
 Non sostituirlo con una ricerca nel catalogo: riscrivere una regola
@@ -114,7 +141,9 @@ con `fontTools` se serve un peso diverso.
 
 ## Stato della verifica
 
-`:core` è compilato ed eseguito davvero: 99 test, 27 mutanti su 27.
+`:core` è compilato ed eseguito davvero: 111 test. Lo script dei mutanti ne
+dichiara 33; tienili allineati al codice, perché un mutante che non si applica
+non verifica nulla e non lo dice — lo script ora fallisce anche per quello.
 
 Il modulo `app` non è **mai stato compilato**. Il primo build troverà errori.
 Candidati più probabili: il suffisso di KSP nel version catalog, la firma di

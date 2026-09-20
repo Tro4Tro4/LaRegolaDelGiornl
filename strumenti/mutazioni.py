@@ -36,8 +36,8 @@ MUTAZIONI = [
   "ordinamento rimosso: l'ordine del catalogo conta"),
  ("Selezione","Selezione.kt", "Math.floorMod(mescola(giorno, salt), ordinati.size.toLong())", "Math.floorMod(giorno, ordinati.size.toLong())",
   "hash rimosso: indice sequenziale"),
- ("Selezione","Selezione.kt", "for (quanti in livelli.size downTo 0)", "for (quanti in livelli.size downTo 1)",
-  "i vincoli non si rilassano mai del tutto"),
+ ("Selezione","Selezione.kt", "for (quanti in livelli.size downTo 1)", "for (quanti in livelli.size downTo 2)",
+  "il rilassamento si ferma prima del solo cooldown"),
  ("Valutazione","Valutazione.kt", "if (s.realtimeMs < m.realtimeMs) return null", "if (false) return null",
   "riavvio non rilevato"),
  ("Valutazione","Valutazione.kt", "if (s.passi < m.passi) return null", "if (false) return null",
@@ -56,12 +56,31 @@ MUTAZIONI = [
   "apri non e' piu' idempotente"),
  ("Motore","Motore.kt", "if (!corrente.aperto) return corrente", "if (false) return corrente",
   "chiudi rivaluta un giorno gia' chiuso"),
- ("Motore","Motore.kt", "if (corrente.fonte == Fonte.SENSORE) return corrente", "if (false) return corrente",
-  "la risposta sovrascrive il verdetto del sensore"),
+ ("Motore","Motore.kt", "if (corrente.fonte != Fonte.NESSUNA) return corrente", "if (false) return corrente",
+  "la risposta sovrascrive un verdetto gia' dato"),
  ("Pianificatore","Pianificatore.kt", "if (i.isAfter(adesso))", "if (!i.isBefore(adesso))",
   "sveglia allo stesso istante: riscatto immediato"),
- ("Pianificatore","Pianificatore.kt", "for (g in (corrente - 1)..(corrente + 2))", "for (g in corrente..(corrente + 2))",
-  "il giorno logico precedente non e' candidato"),
+ ("Pianificatore","Pianificatore.kt", "for (g in corrente..(corrente + 2))", "for (g in (corrente + 1)..(corrente + 2))",
+  "il giorno logico corrente non e' candidato"),
+ ("Motore", "Motore.kt", "val esito = Valutazione.dichiarata(risposta)",
+  "val esito = Valutazione.valuta(regolaDi(corrente), misureDi(corrente), baseline(giorno), risposta)",
+  "la risposta viene rivalutata con una baseline nata dopo la domanda"),
+ ("Motore", "Motore.kt", "if (!conDomanda && esito.verdetto == Verdetto.IGNOTO)",
+  "if (conDomanda && esito.verdetto == Verdetto.IGNOTO)",
+  "conDomanda invertito: si archivia come ignorato cio' che e' stato chiesto"),
+ ("Modello", "Modello.kt", "setOf(MotivoIgnoto.NESSUNA_RISPOSTA, MotivoIgnoto.MAI_CHIESTO)",
+  "setOf(MotivoIgnoto.NESSUNA_RISPOSTA)",
+  "si continua a chiedere per un giorno archiviato a posteriori"),
+ ("Recupero", "Recupero.kt", "?.takeIf { it >= oggi - 1 }", "?.takeIf { it >= oggi - 7 }",
+  "si chiede anche per giorni molto arretrati"),
+ ("Recupero", "Recupero.kt", ".sorted()", ".sortedDescending()",
+  "si archivia dal piu' recente: la mediana cresce nell'ordine sbagliato"),
+ ("Recupero", "Recupero.kt", "scaduti.lastOrNull()", "scaduti.firstOrNull()",
+  "la domanda va al giorno piu' vecchio invece che a quello appena passato"),
+ ("Recupero", "Recupero.kt", "Pianificatore.seraPassata(adesso, zona, orari, it)", "true",
+  "si chiudono giorni la cui sera non e' ancora arrivata"),
+ ("Recupero", "Recupero.kt", "conDomanda = it == interrogabile", "conDomanda = true",
+  "si chiede per ogni giorno recuperato"),
 ]
 
 def esegui(i):
@@ -91,7 +110,22 @@ def esegui(i):
     return (i, modulo, desc, "ucciso" if ucciso else "SOPRAVVISSUTO", riga[-1] if riga else "")
 
 if __name__ == "__main__":
-    a, b = int(sys.argv[1]), int(sys.argv[2])
+    # Senza argomenti li esegue tutti: il numero cambia quando il codice cambia,
+    # e un intervallo scritto a mano invecchia in silenzio.
+    a = int(sys.argv[1]) if len(sys.argv) > 1 else 0
+    b = int(sys.argv[2]) if len(sys.argv) > 2 else len(MUTAZIONI)
+
+    esiti = []
     for i in range(a, min(b, len(MUTAZIONI))):
         i, modulo, desc, stato, nota = esegui(i)
+        esiti.append(stato)
         print(f"[{i:2d}] {stato:14s} {modulo:13s} {desc}  ({nota})", flush=True)
+
+    # Un mutante ERRORE e' un frammento che non esiste piu' nel sorgente: il
+    # mutante non viene applicato e il test non verifica niente. Contarlo come
+    # innocuo e' il modo in cui una suite si svuota senza che nessuno se ne accorga.
+    vivi = [s for s in esiti if s != "ucciso"]
+    print(f"\n{len(esiti) - len(vivi)}/{len(esiti)} uccisi")
+    if vivi:
+        print("mutanti non uccisi:", ", ".join(sorted(set(vivi))))
+        sys.exit(1)
