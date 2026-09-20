@@ -46,35 +46,47 @@ class Motore(
      * Chiude la giornata. Restituisce null se quel giorno non ha mai avuto una
      * regola: non si valuta una regola che l'utente non ha mai visto, e non si
      * inventa storia a posteriori.
+     *
+     * [conDomanda] e' false quando il giorno viene archiviato senza che nessuno
+     * possa piu' chiedere: la rete di sicurezza che recupera giorni vecchi. Il
+     * motivo diventa MAI_CHIESTO invece di NESSUNA_RISPOSTA, perche' dire che
+     * l'utente ha ignorato una domanda mai posta e' falso e falsa la composizione.
      */
-    suspend fun chiudi(giorno: Long): GiornoSalvato? {
+    suspend fun chiudi(giorno: Long, conDomanda: Boolean = true): GiornoSalvato? {
         val corrente = archivio.leggi(giorno) ?: return null
         if (!corrente.aperto) return corrente // gia' chiuso: non si rivaluta
 
         val sera = if (corrente.livello == Livello.OSSERVABILE) contapassi.leggi() else null
         val conMisura = corrente.copy(sera = sera)
         val esito = Valutazione.valuta(regolaDi(conMisura), misureDi(conMisura), baseline(giorno))
+        val motivo =
+            if (!conDomanda && esito.verdetto == Verdetto.IGNOTO) MotivoIgnoto.MAI_CHIESTO
+            else esito.motivo
         val chiuso = conMisura.copy(
-            verdetto = esito.verdetto, fonte = esito.fonte, motivo = esito.motivo
+            verdetto = esito.verdetto, fonte = esito.fonte, motivo = motivo
         )
         archivio.salva(chiuso)
         return chiuso
     }
 
     /**
-     * Risposta si/no dalla notifica serale. Non sovrascrive mai un verdetto
-     * gia' ottenuto dal sensore.
+     * Risposta si/no dalla notifica serale.
+     *
+     * Chi ha gia' deciso decide: se chiudi() ha ottenuto un verdetto, dal sensore
+     * o da una risposta precedente, questa chiamata non tocca nulla.
+     *
+     * Se invece il verdetto manca, la domanda e' stata posta davvero e la risposta
+     * vale: NON si rivaluta con il sensore. Rivalutare significherebbe ricalcolare
+     * la baseline adesso, e la baseline si muove — un giorno precedente chiuso in
+     * ritardo ne fa nascere una che al momento della domanda non esisteva. L'utente
+     * risponderebbe "si" e si vedrebbe registrare il "no" del contapassi, a una
+     * domanda che l'app gli aveva fatto proprio perche' il contapassi non sapeva.
      */
     suspend fun rispondi(giorno: Long, risposta: Boolean): GiornoSalvato? {
         val corrente = archivio.leggi(giorno) ?: return null
-        // Nessuna guardia sul sensore: e' Valutazione a preferirlo sempre alla
-        // risposta, quindi ricalcolare da' lo stesso verdetto. La guardia sulla
-        // risposta gia' data invece serve, ed e' l'unica.
-        if (corrente.fonte == Fonte.UTENTE) return corrente
+        if (corrente.fonte != Fonte.NESSUNA) return corrente
 
-        val esito = Valutazione.valuta(
-            regolaDi(corrente), misureDi(corrente), baseline(giorno), risposta
-        )
+        val esito = Valutazione.dichiarata(risposta)
         val chiuso = corrente.copy(
             verdetto = esito.verdetto, fonte = esito.fonte, motivo = esito.motivo
         )

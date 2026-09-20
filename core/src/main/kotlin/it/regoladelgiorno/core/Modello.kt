@@ -50,7 +50,11 @@ enum class MotivoIgnoto {
     SENSORE_ASSENTE,
     RIAVVIO,
     BASELINE_INSUFFICIENTE,
-    NESSUNA_RISPOSTA
+    /** La domanda e' stata posta e l'utente non ha risposto. Ignorare e' una risposta. */
+    NESSUNA_RISPOSTA,
+    /** Il giorno e' stato archiviato senza che la domanda venisse mai posta:
+     *  l'app non stava girando quando sarebbe stato il momento di chiedere. */
+    MAI_CHIESTO
 }
 
 data class Esito(
@@ -58,5 +62,11 @@ data class Esito(
     val fonte: Fonte,
     val motivo: MotivoIgnoto? = null
 ) {
-    val daChiedere: Boolean get() = verdetto == Verdetto.IGNOTO && motivo != MotivoIgnoto.NESSUNA_RISPOSTA
+    val daChiedere: Boolean get() = verdetto == Verdetto.IGNOTO && motivo !in PORTA_CHIUSA
+
+    private companion object {
+        /** Motivi dopo i quali non si chiede piu': il silenzio e' gia' una risposta,
+         *  e un giorno archiviato a posteriori non si riapre. */
+        val PORTA_CHIUSA = setOf(MotivoIgnoto.NESSUNA_RISPOSTA, MotivoIgnoto.MAI_CHIESTO)
+    }
 }

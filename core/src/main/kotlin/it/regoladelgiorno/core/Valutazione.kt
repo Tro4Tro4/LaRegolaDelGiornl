@@ -68,7 +68,12 @@ object Valutazione {
         return dichiarata(rispostaUtente)
     }
 
-    private fun dichiarata(risposta: Boolean?): Esito = when (risposta) {
+    /**
+     * L'esito di una risposta data (o non data) dall'utente. Pubblica perche'
+     * e' anche la porta che il Motore usa quando la domanda e' gia' stata posta:
+     * a quel punto il sensore ha gia' avuto la sua occasione.
+     */
+    fun dichiarata(risposta: Boolean?): Esito = when (risposta) {
         true -> Esito(Verdetto.SI, Fonte.UTENTE)
         false -> Esito(Verdetto.NO, Fonte.UTENTE)
         null -> Esito(Verdetto.IGNOTO, Fonte.NESSUNA, MotivoIgnoto.NESSUNA_RISPOSTA)

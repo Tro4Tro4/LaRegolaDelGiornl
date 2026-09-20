@@ -140,6 +140,27 @@ internal fun testMotore() {
         vero(Esito(c.verdetto, c.fonte, c.motivo).daChiedere)
     }
 
+    test("chiudi: senza domanda il giorno non risulta ignorato, risulta mai chiesto") {
+        // La rete di sicurezza archivia i giorni vecchi rimasti aperti. Registrarli
+        // come NESSUNA_RISPOSTA direbbe che l'utente ha ignorato una domanda che
+        // nessuno gli ha mai fatto, e falserebbe la composizione.
+        val a = ArchivioFinto()
+        val m = motore(a, catalogo = listOf(CAT_MOTORE[1]))
+        bloccante { m.apri(G) }
+        val c = bloccante { m.chiudi(G, conDomanda = false) }!!
+        eq(Verdetto.IGNOTO, c.verdetto)
+        eq(MotivoIgnoto.MAI_CHIESTO, c.motivo)
+        vero(!Esito(c.verdetto, c.fonte, c.motivo).daChiedere, "non si chiede piu' per un giorno archiviato")
+        vero(!c.aperto, "il giorno risulta chiuso")
+    }
+
+    test("chiudi: con la domanda il silenzio resta silenzio") {
+        val a = ArchivioFinto()
+        val m = motore(a, catalogo = listOf(CAT_MOTORE[1]))
+        bloccante { m.apri(G) }
+        eq(MotivoIgnoto.NESSUNA_RISPOSTA, bloccante { m.chiudi(G) }!!.motivo)
+    }
+
     test("chiudi: e' idempotente, non rivaluta un giorno gia' chiuso") {
         val a = ArchivioFinto()
         val m = motore(a, catalogo = listOf(CAT_MOTORE[1]))
@@ -174,6 +195,41 @@ internal fun testMotore() {
         val r = bloccante { m.rispondi(G, true) }!!
         eq(Verdetto.NO, r.verdetto)
         eq(Fonte.SENSORE, r.fonte)
+    }
+
+    test("rispondi: la risposta arriva dopo che la baseline e' nata, e vale lo stesso") {
+        // Il giorno viene chiuso quando la baseline non esiste ancora: l'app CHIEDE.
+        // Poi i giorni precedenti, rimasti aperti, vengono chiusi a posteriori dalla
+        // rete di sicurezza e la baseline nasce. Solo allora l'utente risponde.
+        // La domanda e' stata posta: la risposta deve contare, e il sensore non deve
+        // piu' entrare in un giorno gia' chiuso.
+        val a = ArchivioFinto()
+        for (i in 1..7) {
+            a.righe[G - i] = GiornoSalvato(
+                giornoLogico = G - i, regolaId = "f1", testo = "x",
+                categoria = Categoria.FISICO, livello = Livello.OSSERVABILE, intensita = 1,
+                metrica = Metrica.PASSI_SOPRA_BASELINE_ASSOLUTI, soglia = 2000,
+                mattina = Misurazione(0, 1_000) // aperto: la sera non e' mai stata letta
+            )
+        }
+        val p = ContapassiFinto(Misurazione(0, 1_000))
+        val m = motore(a, p, catalogo = listOf(CAT_MOTORE[0]))
+        bloccante { m.apri(G) }
+        p.valore = Misurazione(1_000, 60_000) // pochi passi: il sensore direbbe NO
+        val chiuso = bloccante { m.chiudi(G) }!!
+        eq(MotivoIgnoto.BASELINE_INSUFFICIENTE, chiuso.motivo)
+        vero(Esito(chiuso.verdetto, chiuso.fonte, chiuso.motivo).daChiedere, "l'app deve aver chiesto")
+
+        for (i in 1..7) {
+            a.righe[G - i] = a.righe[G - i]!!.copy(
+                sera = Misurazione(5_000, 60_000), verdetto = Verdetto.SI, fonte = Fonte.SENSORE
+            )
+        }
+
+        val r = bloccante { m.rispondi(G, true) }!!
+        eq(Verdetto.SI, r.verdetto)
+        eq(Fonte.UTENTE, r.fonte)
+        eq(null, r.motivo)
     }
 
     test("rispondi: la seconda risposta non conta") {
