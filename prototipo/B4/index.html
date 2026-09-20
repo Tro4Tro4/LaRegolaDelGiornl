@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Regola del Giorno — prototipo B4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --chrome-fondo:#f4f3f1;--chrome-testo:#2b2a28;--chrome-tenue:#6e6b66;--chrome-bordo:#d9d6d1;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --chrome-fondo:#171614;--chrome-testo:#e8e5e0;--chrome-tenue:#9a958d;--chrome-bordo:#33302c;
+  }
+}
+:root[data-theme="dark"]{
+  --chrome-fondo:#171614;--chrome-testo:#e8e5e0;--chrome-tenue:#9a958d;--chrome-bordo:#33302c;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;padding:20px 16px 48px;background:var(--chrome-fondo);color:var(--chrome-testo);
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:14px;line-height:1.5;
+}
+
+/* impalcatura: sans-serif e grigia, fuori dalla cornice */
+.impalcatura{max-width:420px;margin:0 auto 20px}
+.impalcatura h1{font-size:15px;font-weight:600;margin:0 0 2px}
+.impalcatura p{margin:0 0 16px;color:var(--chrome-tenue);font-size:13px}
+.gruppo{margin-bottom:10px}
+.etichetta{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--chrome-tenue);margin-bottom:5px}
+.bottoni{display:flex;flex-wrap:wrap;gap:6px}
+button{
+  font:inherit;font-size:13px;padding:7px 12px;background:transparent;color:var(--chrome-testo);
+  border:1px solid var(--chrome-bordo);border-radius:3px;cursor:pointer;
+}
+button[aria-pressed="true"]{background:var(--chrome-testo);color:var(--chrome-fondo);border-color:var(--chrome-testo)}
+button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+.telefono{max-width:360px;margin:0 auto;border:1px solid var(--chrome-bordo);border-radius:4px;overflow:hidden}
+.schermo{
+  --k:1;
+  width:100%;height:640px;overflow-y:auto;overflow-x:hidden;
+  font-family:Literata,Georgia,"Times New Roman",serif;-webkit-font-smoothing:antialiased;
+  background:var(--fondo);color:var(--inchiostro);
+}
+.schermo.grande{--k:2} /* scala caratteri di sistema al 200% */
+
+/* carta e inchiostro. Il tenue e' a .60: a .52 il contrasto era 4,29:1,
+   sotto il minimo di 4,5:1 richiesto per il testo piccolo. */
+.schermo.carta{--fondo:#ffffff;--inchiostro:#000000;--tenue:rgba(0,0,0,.60);--filo:rgba(0,0,0,.18)}
+.schermo.inchiostro{--fondo:#0a0a0a;--inchiostro:#ffffff;--tenue:rgba(255,255,255,.56);--filo:rgba(255,255,255,.24)}
+
+.pagina{min-height:100%;display:flex;flex-direction:column;animation:entra .2s ease both}
+@keyframes entra{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){ .pagina{animation:none} }
+
+/* ---- schermata principale ---- */
+.principale{padding:0 20px 28px}
+/* bersaglio da 48dp: il testo resta da 12sp, l'area toccabile no */
+.data{
+  font-size:calc(var(--k)*12px);font-variant:small-caps;letter-spacing:.14em;color:var(--tenue);
+  background:none;border:0;font-family:inherit;text-align:left;cursor:pointer;
+  padding:18px 12px;margin:38px 0 0 -12px;min-height:48px;align-self:flex-start;
+}
+.centro{
+  flex:1;display:flex;flex-direction:column;
+  justify-content:center;justify-content:safe center; /* al 200% il blocco non viene tagliato in alto */
+  padding-bottom:7%;
+}
+/* il biglietto: filo sottile, nessuna ombra, nessun riempimento,
+   e una rotazione appena percepibile */
+.biglietto{
+  border:1px solid var(--filo);
+  padding:30px 34px 32px 24px;      /* piu' aria a destra: la mano si ferma prima del bordo */
+  margin:0 16px 0 8px;
+  transform:rotate(-.6deg);
+  transform-origin:12% 50%;
+}
+.regola{margin:0;line-height:1.35;font-weight:400;letter-spacing:-.005em}
+/* il segno sta fuori dal biglietto: e' l'osservazione dell'app, non parte del messaggio */
+.segno{margin:24px 0 0 20px}
+
+/* ---- storico ---- */
+.storico{padding:38px 24px 40px}
+.titolo{font-size:calc(var(--k)*12px);font-variant:small-caps;letter-spacing:.14em;color:var(--tenue);margin:0 0 20px;font-weight:400}
+.riga{display:flex;gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid var(--filo)}
+.riga:first-of-type{border-top:0}
+.giorno{flex:0 0 auto;width:calc(var(--k)*38px);font-size:calc(var(--k)*11px);font-variant:small-caps;letter-spacing:.08em;color:var(--tenue)}
+.voce{flex:1;font-size:calc(var(--k)*15px);line-height:1.4}
+.marca{flex:0 0 auto;align-self:center;line-height:0}
+.coda{margin:20px 0 0;font-size:calc(var(--k)*13px);color:var(--tenue);line-height:1.5}
+
+/* tre livelli di stacco, non tre volte lo stesso */
+.approfondimento{margin-top:52px}
+.manutenzione{margin-top:64px;padding-top:22px;border-top:1px solid var(--filo)}
+
+.barra-riga{margin-bottom:20px}
+.barra-testa{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+.barra-nome{font-size:calc(var(--k)*12px);font-variant:small-caps;letter-spacing:.1em}
+.conteggi{font-size:calc(var(--k)*11px);color:var(--tenue);display:flex;gap:10px;align-items:center}
+.conteggi span{display:inline-flex;gap:4px;align-items:center;line-height:1}
+/* barra costruita con larghezze proporzionali reali: un SVG stirato
+   deformerebbe l'angolo del tratteggio */
+.barra{display:flex;height:8px;width:100%}
+.seg-si{background:currentColor}
+.seg-no{background:repeating-linear-gradient(45deg,currentColor 0 1.5px,transparent 1.5px 4.5px)}
+.seg-ignoti{border:1px solid currentColor;opacity:.5}
+
+.opzione{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  width:100%;min-height:48px;padding:13px 0;font-size:calc(var(--k)*15px);
+  font-family:inherit;background:none;border:0;border-radius:0;color:inherit;
+  text-align:left;cursor:pointer;
+}
+.opzione:active .valore{text-decoration:underline;text-underline-offset:3px}
+
+/* velo e riquadri: cio' che e' dell'app resta in Literata,
+   cio' che e' del sistema operativo e' mostrato come segnaposto, non imitato */
+.velo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--fondo)}
+.spiegazione{max-width:280px}
+.spiegazione p{margin:0 0 26px;font-size:calc(var(--k)*16px);line-height:1.45}
+.azioni{display:flex;gap:26px}
+.azione{
+  font-family:inherit;font-size:calc(var(--k)*15px);background:none;border:0;padding:12px 0;
+  color:inherit;cursor:pointer;min-height:48px;
+}
+.azione.secondaria{color:var(--tenue)}
+.finto{
+  font-family:ui-sans-serif,system-ui,sans-serif;border:1px dashed var(--tenue);
+  padding:18px;max-width:300px;color:var(--tenue);font-size:13px;line-height:1.5;
+}
+.finto strong{display:block;color:var(--inchiostro);margin-bottom:10px;font-size:13px}
+.finto .bottoncini{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.finto button{font-size:13px;color:var(--inchiostro);border-color:var(--tenue)}
+.telaio{position:relative}
+.valore{color:var(--tenue)}
+.nota{margin-top:22px;font-size:calc(var(--k)*12px);color:var(--tenue);line-height:1.55}
+</style>
+</head>
+<body>
+
+<div class="impalcatura">
+  <h1>La Regola del Giorno — prototipo B4</h1>
+  <p>I comandi qui sotto non fanno parte dell'app.</p>
+  <div class="gruppo"><div class="etichetta">Schermata</div><div class="bottoni" id="cSchermata"></div></div>
+  <div class="gruppo"><div class="etichetta">Stato della regola</div><div class="bottoni" id="cStato"></div></div>
+  <div class="gruppo"><div class="etichetta">Regola (corpi da 34 a 26)</div><div class="bottoni" id="cRegola"></div></div>
+  <div class="gruppo"><div class="etichetta">Tema</div><div class="bottoni" id="cTema"></div></div>
+  <div class="gruppo"><div class="etichetta">Scala caratteri di sistema</div><div class="bottoni" id="cScala"></div></div>
+</div>
+
+<div class="telefono"><div class="schermo carta telaio" id="schermo"></div></div>
+
+<script>
+/* Stessa funzione a scalini di Tipometria.kt */
+function dimensioneSp(t){
+  const n=t.length;
+  if(n<=30) return 34;
+  if(n<=42) return 32;
+  if(n<=56) return 30;
+  if(n<=72) return 28;
+  return 26;
+}
+
+const REGOLE=[
+  "Oggi scrivi a mano.",
+  "Oggi telefona a chi avresti scritto.",
+  "Oggi non guardare l'ora fino a mezzogiorno.",
+  "Oggi cammina venti minuti senza destinazione. Non \u00e8 un tragitto.",
+  "Oggi fai un pezzo del percorso di sempre da una strada che non hai mai preso."
+];
+
+const STATI={
+  attesa:{glifo:"attesa",descr:"in attesa"},
+  si:{glifo:"pieno",descr:"rispettata"},
+  no:{glifo:"barrato",descr:"non rispettata"},
+  nonValutato:{glifo:"trattino",descr:"non valutabile"}
+};
+
+/* segni disegnati, non caratteri tipografici */
+function disegnaSegno(tipo,lato){
+  const r=lato/2,c=lato/2,s=Math.max(1,lato*0.095),raggio=r-s/2;
+  const a=`width="${lato}" height="${lato}" viewBox="0 0 ${lato} ${lato}" aria-hidden="true" focusable="false"`;
+  if(tipo==="pieno") return `<svg ${a}><circle cx="${c}" cy="${c}" r="${raggio}" fill="currentColor"/></svg>`;
+  if(tipo==="barrato") return `<svg ${a}><circle cx="${c}" cy="${c}" r="${raggio}" fill="none" stroke="currentColor" stroke-width="${s}"/><line x1="${c-raggio*.72}" y1="${c+raggio*.72}" x2="${c+raggio*.72}" y2="${c-raggio*.72}" stroke="currentColor" stroke-width="${s}"/></svg>`;
+  if(tipo==="trattino") return `<svg ${a}><line x1="${s/2}" y1="${c}" x2="${lato-s/2}" y2="${c}" stroke="currentColor" stroke-width="${s}"/></svg>`;
+  return `<svg ${a}><circle cx="${c}" cy="${c}" r="${raggio}" fill="none" stroke="currentColor" stroke-width="${s}"/></svg>`;
+}
+/* ogni segno porta il proprio nome accessibile, anche nella lista */
+function segno(tipo,lato,nome){
+  return `<span role="img" aria-label="${nome}">${disegnaSegno(tipo,lato)}</span>`;
+}
+
+let stato={
+  schermata:"principale",regola:2,esito:"attesa",tema:"carta",scala:"",
+  imp:{mattino:"07:00",sera:"21:30",confine:"00:00",osservazione:false},
+  velo:null
+};
+
+function schermataPrincipale(){
+  const testo=REGOLE[stato.regola], sp=dimensioneSp(testo), s=STATI[stato.esito];
+  return `<div class="pagina principale">
+    <button class="data" onclick="vaiA('storico')">sabato 19 settembre</button>
+    <div class="centro">
+      <div class="biglietto"><p class="regola" style="font-size:calc(var(--k) * ${sp}px)">${testo}</p></div>
+      <div class="segno">${segno(s.glifo,13,s.descr)}</div>
+    </div>
+  </div>`;
+}
+
+const VOCI=[
+  ["18 set","Oggi complimenta uno sconosciuto.","pieno","rispettata"],
+  ["17 set","Oggi tieni il telefono in un'altra stanza mentre mangi.","barrato","non rispettata"],
+  ["16 set","Oggi nota chi parla di pi\u00f9 nelle conversazioni a cui partecipi.","trattino","non valutabile"],
+  ["15 set","Oggi cammina venti minuti senza destinazione.","pieno","rispettata"],
+  ["14 set","Oggi ringrazia qualcuno per una cosa di un anno fa.","pieno","rispettata"],
+  ["13 set","Oggi fotografa una cosa sola. Una. Poi basta.","barrato","non rispettata"],
+  ["12 set","Oggi parla solo di persona, mai per messaggio.","trattino","non valutabile"],
+  ["11 set","Oggi scrivi a mano qualcosa che avresti digitato.","pieno","rispettata"]
+];
+
+const COMPOSIZIONE=[
+  {nome:"sociale",si:14,no:9,ignoti:4},
+  {nome:"fisico",si:21,no:5,ignoti:2},
+  {nome:"digitale",si:7,no:16,ignoti:3},
+  {nome:"creativo",si:11,no:8,ignoti:6},
+  {nome:"introspettivo",si:9,no:7,ignoti:11}
+];
+
+function barra(r){
+  const tot=r.si+r.no+r.ignoti;
+  return `<div class="barra" role="img"
+      aria-label="${r.nome}: ${r.si} rispettate, ${r.no} non rispettate, ${r.ignoti} non valutabili">
+    <div class="seg-si" style="flex:${r.si/tot}"></div>
+    <div class="seg-no" style="flex:${r.no/tot}"></div>
+    <div class="seg-ignoti" style="flex:${r.ignoti/tot}"></div>
+  </div>`;
+}
+
+function schermataStorico(){
+  const righe=VOCI.map(([g,t,m,d])=>`<div class="riga">
+      <div class="giorno">${g}</div><div class="voce">${t}</div>
+      <div class="marca">${segno(m,11,d)}</div>
+    </div>`).join("");
+
+  const barre=COMPOSIZIONE.map(r=>`<div class="barra-riga">
+      <div class="barra-testa"><span class="barra-nome">${r.nome}</span>
+        <span class="conteggi" aria-hidden="true">
+          <span>${disegnaSegno("pieno",9)} ${r.si}</span>
+          <span>${disegnaSegno("barrato",9)} ${r.no}</span>
+          <span>${disegnaSegno("trattino",9)} ${r.ignoti}</span>
+        </span></div>
+      ${barra(r)}
+    </div>`).join("");
+
+  return `<div class="pagina storico">
+    <button class="data" style="margin-top:0" onclick="vaiA('principale')">&larr; oggi</button>
+    <h2 class="titolo" style="margin-top:22px">gli ultimi trenta giorni</h2>
+    ${righe}
+    <p class="coda">I giorni precedenti restano registrati, ma non si scorrono da qui.</p>
+
+    <div class="approfondimento">
+      <h2 class="titolo">quali regole ti riescono</h2>
+      ${barre}
+    </div>
+
+    <div class="manutenzione">
+      <h2 class="titolo">impostazioni</h2>
+      <button class="opzione" onclick="apriOrario('mattino')"><span>Notifica del mattino</span><span class="valore">${stato.imp.mattino}</span></button>
+      <button class="opzione" onclick="apriOrario('sera')"><span>Notifica della sera</span><span class="valore">${stato.imp.sera}</span></button>
+      <button class="opzione" onclick="apriOrario('confine')"><span>Il giorno inizia a</span><span class="valore">${stato.imp.confine}</span></button>
+      <button class="opzione" onclick="commutaOsservazione()"><span>Osservazione automatica</span><span class="valore">${stato.imp.osservazione?"attiva":"non attiva"}</span></button>
+      <p class="nota">L'osservazione automatica usa il contapassi del telefono, due letture al giorno. Nulla lascia il dispositivo.</p>
+    </div>
+  </div>`;
+}
+
+const ETICHETTE={mattino:"Notifica del mattino",sera:"Notifica della sera",confine:"Il giorno inizia a"};
+const PROPOSTE={mattino:["06:30","07:00","08:15"],sera:["20:00","21:30","22:45"],confine:["00:00","03:00","04:00"]};
+
+function apriOrario(chiave){ stato.velo={tipo:"orario",chiave}; disegna(); }
+
+function commutaOsservazione(){
+  if(stato.imp.osservazione){ stato.imp.osservazione=false; disegna(); return; }
+  stato.velo={tipo:"spiegazione"}; disegna();   // prima si spiega, poi il sistema chiede
+}
+
+function chiudiVelo(){ stato.velo=null; disegna(); }
+function scegliOrario(v){ stato.imp[stato.velo.chiave]=v; chiudiVelo(); }
+function vaiAlPermesso(){ stato.velo={tipo:"permesso"}; disegna(); }
+function concediPermesso(ok){ stato.imp.osservazione=ok; chiudiVelo(); }
+
+function disegnaVelo(){
+  const v=stato.velo;
+  if(v.tipo==="orario"){
+    return `<div class="velo"><div class="finto">
+      <strong>${ETICHETTE[v.chiave]}</strong>
+      Selettore orario di sistema (android.app.TimePickerDialog). Non e' disegnato dall'app: rispetta lingua, formato 12/24 ore e screen reader del dispositivo.
+      <div class="bottoncini">
+        ${PROPOSTE[v.chiave].map(o=>`<button onclick="scegliOrario('${o}')">${o}</button>`).join("")}
+        <button onclick="chiudiVelo()">Annulla</button>
+      </div>
+    </div></div>`;
+  }
+  if(v.tipo==="spiegazione"){
+    return `<div class="velo"><div class="spiegazione">
+      <p>Per osservare da solo le regole legate al movimento, il telefono legge il contapassi due volte al giorno: la mattina e la sera. Nient'altro, e niente esce dal dispositivo.</p>
+      <div class="azioni">
+        <button class="azione secondaria" onclick="chiudiVelo()">Non ora</button>
+        <button class="azione" onclick="vaiAlPermesso()">Continua</button>
+      </div>
+    </div></div>`;
+  }
+  return `<div class="velo"><div class="finto">
+    <strong>Richiesta di sistema</strong>
+    Consentire a La Regola del Giorno di accedere all'attivita fisica? (ACTIVITY_RECOGNITION, runtime da API 29)
+    <div class="bottoncini">
+      <button onclick="concediPermesso(true)">Consenti</button>
+      <button onclick="concediPermesso(false)">Rifiuta</button>
+    </div>
+  </div></div>`;
+}
+
+let ultimaSchermata=null;
+function disegna(){
+  const sc=document.getElementById("schermo");
+  const scorrimento=sc.scrollTop;
+  sc.className=("schermo "+stato.tema+" "+stato.scala+" telaio").trim();
+  sc.innerHTML=(stato.schermata==="principale"?schermataPrincipale():schermataStorico())
+    + (stato.velo?disegnaVelo():"");
+  sc.scrollTop = (stato.schermata===ultimaSchermata) ? scorrimento : 0;
+  ultimaSchermata=stato.schermata;
+  document.querySelectorAll("[data-chiave]").forEach(b=>{
+    b.setAttribute("aria-pressed",String(stato[b.dataset.chiave])===b.dataset.valore);
+  });
+}
+function vaiA(s){stato.schermata=s;disegna();}
+
+[["cSchermata","schermata",[["principale","Principale"],["storico","Storico"]]],
+ ["cStato","esito",[["attesa","In attesa"],["si","Rispettata"],["no","Non rispettata"],["nonValutato","Non valutabile"]]],
+ ["cRegola","regola",[[0,"34"],[1,"32"],[2,"30"],[3,"28"],[4,"26"]]],
+ ["cTema","tema",[["carta","Carta"],["inchiostro","Inchiostro"]]],
+ ["cScala","scala",[["","100%"],["grande","200%"]]]
+].forEach(([id,chiave,opzioni])=>{
+  const c=document.getElementById(id);
+  opzioni.forEach(([val,testo])=>{
+    const b=document.createElement("button");
+    b.textContent=testo;
+    b.dataset.chiave=chiave; b.dataset.valore=val;
+    b.onclick=()=>{
+      stato[chiave]=val;
+      if(chiave==="esito"||chiave==="regola") stato.schermata="principale";
+      disegna();
+    };
+    c.appendChild(b);
+  });
+});
+
+disegna();
+</script>
+</body>
+</html>
