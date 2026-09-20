@@ -15,7 +15,7 @@ all'utente sarebbe falsa.
 
 | | |
 |---|---|
-| Logica di dominio | 111 test, 33 mutanti dichiarati |
+| Logica di dominio | 111 test, 33 mutanti uccisi su 33 |
 | Catalogo | 150 regole validate, simulate su tre anni d'uso |
 | Layer Android | scritto, **mai compilato** |
 | Interfaccia Compose | scritta, **mai compilata** |

@@ -246,6 +246,9 @@ domanda della sera, proprio sui dispositivi per cui esiste, registrando come
 su quali giorni chiudere e a chi chiedere: nel worker non sarebbe verificabile
 senza un emulatore.
 
+**Tutti e trentatré i mutanti uccisi**, rieseguiti uno per uno dopo le
+correzioni. Qui sotto perché non erano trentatré prima.
+
 **Tre mutanti su venticinque non si applicavano più.** Lo script ne dichiarava
 ventisette; ne conteneva venticinque, e tre cercavano frammenti che il codice non
 conteneva più — due erano rimasti indietro quando il codice morto era stato
@@ -282,7 +285,7 @@ sottoinsiemando Literata a mano. Il maiuscoletto è vero.
 | Catalogo | 37 KB |
 | Font | 76 KB (da 955 KB) |
 | Test | 99 |
-| Mutanti | 33 dichiarati |
+| Mutanti | 33/33 |
 | Contrasto | 21:1 testo, 5,74:1 tenue chiaro, 6,44:1 tenue scuro |
 
 ---

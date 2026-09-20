@@ -141,9 +141,11 @@ con `fontTools` se serve un peso diverso.
 
 ## Stato della verifica
 
-`:core` è compilato ed eseguito davvero: 111 test. Lo script dei mutanti ne
-dichiara 33; tienili allineati al codice, perché un mutante che non si applica
-non verifica nulla e non lo dice — lo script ora fallisce anche per quello.
+`:core` è compilato ed eseguito davvero: 111 test, 33 mutanti su 33.
+
+Tieni i mutanti allineati al codice: uno che non si applica non verifica nulla e
+non lo dice. Tre lo erano diventati e la cifra è rimasta sbagliata per mesi. Ora
+lo script fallisce anche per quello.
 
 Il modulo `app` non è **mai stato compilato**. Il primo build troverà errori.
 Candidati più probabili: il suffisso di KSP nel version catalog, la firma di
