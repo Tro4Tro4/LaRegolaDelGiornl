@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Duplicano i valori di ui/Tema.kt: servono al sistema prima che
+         Compose esista. Se cambiano li', vanno cambiati anche qui. -->
+    <color name="fondo">#FFFFFFFF</color>
+</resources>

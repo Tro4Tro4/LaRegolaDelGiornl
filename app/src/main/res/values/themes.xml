@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- windowBackground uguale al fondo dell'app: senza questo, su un
+         dispositivo in tema scuro si vede un lampo bianco prima che Compose
+         disegni il primo fotogramma. -->
+    <style name="Theme.RegolaDelGiorno" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/fondo</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

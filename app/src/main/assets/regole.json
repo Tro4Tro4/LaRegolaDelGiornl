@@ -1,0 +1,1395 @@
+{
+  "versione": 1,
+  "regole": [
+    {
+      "id": "soc-01",
+      "testo": "Oggi ringrazia qualcuno per una cosa fatta più di un anno fa.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-02",
+      "testo": "Oggi fai una domanda in più a chi vedi ogni giorno.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-03",
+      "testo": "Oggi complimenta uno sconosciuto per qualcosa che ha scelto lui.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-04",
+      "testo": "Oggi parla per primo con chi stavi per evitare.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-05",
+      "testo": "Oggi chiedi a qualcuno che lavoro faceva suo padre.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-06",
+      "testo": "Oggi telefona a una persona a cui pensi e non senti.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-07",
+      "testo": "Oggi lascia parlare l'altro fino in fondo, senza completare le frasi.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-08",
+      "testo": "Oggi presenta fra loro due persone che non si conoscono.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-09",
+      "testo": "Oggi dì di no a una cosa che avresti accettato per inerzia.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-10",
+      "testo": "Oggi chiedi scusa per una cosa piccola che nessuno ha notato.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-11",
+      "testo": "Oggi mangia con qualcuno invece che da solo.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-12",
+      "testo": "Oggi saluta per nome chi di solito saluti e basta.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-13",
+      "testo": "Oggi racconta a qualcuno una cosa che di solito ti tieni.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-14",
+      "testo": "Oggi ascolta una storia già sentita senza dire che la conosci.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-15",
+      "testo": "Oggi chiedi un consiglio a chi non lo chiederesti mai.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-16",
+      "testo": "Oggi fai una domanda che rischia di avere una risposta lunga.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-17",
+      "testo": "Oggi offri aiuto prima che qualcuno lo chieda.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-18",
+      "testo": "Oggi riprendi una conversazione lasciata a metà settimane fa.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-19",
+      "testo": "Oggi scambia due parole con chi ti serve al banco.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-20",
+      "testo": "Oggi scrivi a mano un biglietto e consegnalo di persona.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-21",
+      "testo": "Oggi accetta il primo invito che ricevi.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-22",
+      "testo": "Oggi chiedi a un collega su cosa sta lavorando davvero.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "FERIALE",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-23",
+      "testo": "Oggi resta cinque minuti in più dopo i saluti.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-24",
+      "testo": "Oggi dì a qualcuno una cosa che apprezzi e non hai detto.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-25",
+      "testo": "Oggi chiedi come sta e aspetta la seconda risposta.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-26",
+      "testo": "Oggi difendi un'opinione che di solito tieni per te.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-27",
+      "testo": "Oggi vai a trovare qualcuno che non vedi da tempo.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "FESTIVO",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-28",
+      "testo": "Oggi cedi il turno a chi hai dietro.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-29",
+      "testo": "Oggi chiedi a qualcuno di insegnarti una cosa che sa fare.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "soc-30",
+      "testo": "Oggi siediti accanto a qualcuno invece che di fronte.",
+      "categoria": "SOCIALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-01",
+      "testo": "Oggi cammina venti minuti senza destinazione. Non è un tragitto.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 2000
+    },
+    {
+      "id": "fis-02",
+      "testo": "Oggi scendi una fermata prima e fai il resto a piedi.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "FERIALE",
+      "intensita": 1,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1200
+    },
+    {
+      "id": "fis-03",
+      "testo": "Oggi fai le scale ogni volta che puoi scegliere.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-04",
+      "testo": "Oggi allunga la strada di casa di dieci minuti.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1000
+    },
+    {
+      "id": "fis-05",
+      "testo": "Oggi cammina mentre parli al telefono.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_PERCENTUALE",
+      "soglia": 10
+    },
+    {
+      "id": "fis-06",
+      "testo": "Oggi fai il giro dell'isolato prima di entrare.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 600
+    },
+    {
+      "id": "fis-07",
+      "testo": "Oggi vai a piedi dove andresti in macchina.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1500
+    },
+    {
+      "id": "fis-08",
+      "testo": "Oggi esci di casa entro un'ora dal risveglio.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-09",
+      "testo": "Oggi cammina dopo cena, anche solo dieci minuti.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 800
+    },
+    {
+      "id": "fis-10",
+      "testo": "Oggi porta a piedi una cosa che avresti spedito.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1000
+    },
+    {
+      "id": "fis-11",
+      "testo": "Oggi fai la spesa a piedi.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1200
+    },
+    {
+      "id": "fis-12",
+      "testo": "Oggi cambia strada per andare dove vai sempre.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_PERCENTUALE",
+      "soglia": 5
+    },
+    {
+      "id": "fis-13",
+      "testo": "Oggi resta in piedi durante una telefonata lunga.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-14",
+      "testo": "Oggi stiracchiati ogni volta che ti accorgi di essere fermo.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-15",
+      "testo": "Oggi cammina dieci minuti prima di decidere una cosa.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 800
+    },
+    {
+      "id": "fis-16",
+      "testo": "Oggi arriva a piedi in un posto che non conosci.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "FESTIVO",
+      "intensita": 3,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1500
+    },
+    {
+      "id": "fis-17",
+      "testo": "Oggi percorri un chilometro in più del solito.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1300
+    },
+    {
+      "id": "fis-18",
+      "testo": "Oggi sali le scale invece di aspettare l'ascensore.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-19",
+      "testo": "Oggi porta fuori la spazzatura per la strada più lunga.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 400
+    },
+    {
+      "id": "fis-20",
+      "testo": "Oggi accompagna qualcuno a piedi invece di salutarlo sulla porta.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 700
+    },
+    {
+      "id": "fis-21",
+      "testo": "Oggi cammina con le mani fuori dalle tasche.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-22",
+      "testo": "Oggi fai il doppio dei passi che fai di solito.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_PERCENTUALE",
+      "soglia": 100
+    },
+    {
+      "id": "fis-23",
+      "testo": "Oggi esci a camminare anche se piove.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1000
+    },
+    {
+      "id": "fis-24",
+      "testo": "Oggi fai una pausa in piedi ogni ora.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "FERIALE",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-25",
+      "testo": "Oggi corri per cento metri, una volta sola.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-26",
+      "testo": "Oggi cammina fino a vedere qualcosa che non avevi mai visto.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "FESTIVO",
+      "intensita": 3,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 1500
+    },
+    {
+      "id": "fis-27",
+      "testo": "Oggi lascia l'auto e vai in bicicletta.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-28",
+      "testo": "Oggi cammina piano, più piano del solito.",
+      "categoria": "FISICO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "fis-29",
+      "testo": "Oggi esci a camminare prima di colazione.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 600
+    },
+    {
+      "id": "fis-30",
+      "testo": "Oggi torna a casa dalla strada più lunga.",
+      "categoria": "FISICO",
+      "livello": "OSSERVABILE",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60,
+      "metrica": "PASSI_SOPRA_BASELINE_ASSOLUTI",
+      "soglia": 900
+    },
+    {
+      "id": "dig-01",
+      "testo": "Oggi telefona a chi avresti scritto.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-02",
+      "testo": "Oggi tieni il telefono in un'altra stanza mentre mangi.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-03",
+      "testo": "Oggi non aprire i social prima di mezzogiorno.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-04",
+      "testo": "Oggi rispondi a un messaggio solo quando puoi farlo bene.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-05",
+      "testo": "Oggi esci senza cuffie.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-06",
+      "testo": "Oggi lascia il telefono in borsa mentre cammini.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-07",
+      "testo": "Oggi guarda una cosa sola alla volta, senza secondo schermo.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-08",
+      "testo": "Oggi cancella un'applicazione che apri per abitudine.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-09",
+      "testo": "Oggi non fotografare niente.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-10",
+      "testo": "Oggi metti il telefono in bianco e nero.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-11",
+      "testo": "Oggi leggi su carta qualcosa che avresti letto sullo schermo.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-12",
+      "testo": "Oggi rispondi alle email in un unico momento.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "FERIALE",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-13",
+      "testo": "Oggi non controllare le notifiche finché non ti fermi.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-14",
+      "testo": "Oggi spegni il telefono per un'ora e dì a qualcuno quando.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-15",
+      "testo": "Oggi cerca una cosa senza chiedere a internet.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-16",
+      "testo": "Oggi non usare la navigazione satellitare.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-17",
+      "testo": "Oggi scrivi un messaggio lungo invece di cinque corti.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-18",
+      "testo": "Oggi togli il telefono dal tavolo quando parli con qualcuno.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-19",
+      "testo": "Oggi ascolta un disco intero, nell'ordine in cui è fatto.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-20",
+      "testo": "Oggi non guardare video mentre fai altro.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-21",
+      "testo": "Oggi lascia il telefono a caricare lontano dal letto.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-22",
+      "testo": "Oggi rispondi a voce invece che a messaggio.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-23",
+      "testo": "Oggi disattiva le notifiche di una sola applicazione.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-24",
+      "testo": "Oggi non leggere i commenti.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-25",
+      "testo": "Oggi guarda l'orologio solo quando serve davvero.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-26",
+      "testo": "Oggi chiudi tutte le schede aperte e ricomincia.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "FERIALE",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-27",
+      "testo": "Oggi non mettere nessun segno di approvazione a nessuno.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-28",
+      "testo": "Oggi scrivi a qualcuno senza aspettarti risposta.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-29",
+      "testo": "Oggi tieni lo schermo al minimo della luminosità.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "dig-30",
+      "testo": "Oggi finisci un articolo prima di aprirne un altro.",
+      "categoria": "DIGITALE",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-01",
+      "testo": "Oggi scrivi a mano qualcosa che avresti digitato.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-02",
+      "testo": "Oggi fotografa una cosa sola. Una. Poi basta.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-03",
+      "testo": "Oggi disegna un oggetto che hai davanti, male.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-04",
+      "testo": "Oggi inventa un nome per una cosa che non ce l'ha.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-05",
+      "testo": "Oggi cucina senza ricetta.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-06",
+      "testo": "Oggi scrivi tre righe su come è cominciata la giornata.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-07",
+      "testo": "Oggi canta qualcosa ad alta voce, da solo.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-08",
+      "testo": "Oggi sposta un mobile.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-09",
+      "testo": "Oggi ascolta un genere di musica che non ascolti mai.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-10",
+      "testo": "Oggi scrivi la fine di una storia che non hai iniziato.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-11",
+      "testo": "Oggi fai una cosa con la mano sbagliata.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-12",
+      "testo": "Oggi impara a dire una frase in una lingua che non parli.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-13",
+      "testo": "Oggi costruisci qualcosa con quello che stavi per buttare.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-14",
+      "testo": "Oggi scrivi una lista di cose che non farai mai.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-15",
+      "testo": "Oggi cambia il modo di fare una cosa che fai in automatico.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-16",
+      "testo": "Oggi leggi ad alta voce una pagina a qualcuno.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-17",
+      "testo": "Oggi metti un fiore o una foglia da qualche parte in casa.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-18",
+      "testo": "Oggi prova una ricetta di un posto dove non sei stato.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "FESTIVO",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-19",
+      "testo": "Oggi disegna la pianta della casa dove sei cresciuto.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-20",
+      "testo": "Oggi scrivi un titolo per la giornata di ieri.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-21",
+      "testo": "Oggi indossa una cosa che tieni per le occasioni.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-22",
+      "testo": "Oggi rimetti in funzione un oggetto rotto.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-23",
+      "testo": "Oggi leggi una poesia. Una sola, due volte.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-24",
+      "testo": "Oggi cambia una regola di casa tua per un giorno.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-25",
+      "testo": "Oggi apri un libro a caso e leggi una pagina.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-26",
+      "testo": "Oggi fai una fotografia di una cosa brutta.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-27",
+      "testo": "Oggi scrivi il primo ricordo che ti viene, senza sceglierlo.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-28",
+      "testo": "Oggi prepara da mangiare per qualcun altro.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "FESTIVO",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-29",
+      "testo": "Oggi cambia posto alla sedia dove ti siedi sempre.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "cre-30",
+      "testo": "Oggi finisci una cosa che avevi lasciato a metà.",
+      "categoria": "CREATIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-01",
+      "testo": "Oggi non guardare l'ora fino a mezzogiorno.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-02",
+      "testo": "Oggi nota chi parla di più nelle conversazioni a cui partecipi.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-03",
+      "testo": "Oggi accorgiti di quando stai per dire una bugia piccola.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-04",
+      "testo": "Oggi conta quante volte ti scusi senza motivo.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-05",
+      "testo": "Oggi resta dieci minuti fermo senza fare niente.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-06",
+      "testo": "Oggi scrivi cosa ti ha dato fastidio, e perché.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-07",
+      "testo": "Oggi mangia un pasto senza fare altro.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-08",
+      "testo": "Oggi nota la prima cosa che pensi al risveglio.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-09",
+      "testo": "Oggi chiediti, una volta, se lo stai facendo per te.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-10",
+      "testo": "Oggi accorgiti di quale mano usi per prima.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-11",
+      "testo": "Oggi osserva per un minuto una persona che non conosci.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-12",
+      "testo": "Oggi nota il momento in cui ti stanchi.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-13",
+      "testo": "Oggi non dare consigli a nessuno.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-14",
+      "testo": "Oggi accorgiti di quando cambi argomento.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-15",
+      "testo": "Oggi guarda fuori dalla finestra per cinque minuti.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-16",
+      "testo": "Oggi nota cosa ti ha fatto sorridere per primo.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-17",
+      "testo": "Oggi resta in silenzio per la prima ora della giornata.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "FESTIVO",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-18",
+      "testo": "Oggi chiediti cosa avresti fatto a vent'anni.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-19",
+      "testo": "Oggi nota quante volte controlli se hai ragione.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-20",
+      "testo": "Oggi ascolta i suoni della casa prima di accendere qualcosa.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-21",
+      "testo": "Oggi scrivi una cosa su cui hai cambiato idea.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-22",
+      "testo": "Oggi accorgiti di quando smetti di ascoltare.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-23",
+      "testo": "Oggi nota di cosa hai paura senza motivo.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-24",
+      "testo": "Oggi conta le cose che possiedi in una stanza sola.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-25",
+      "testo": "Oggi chiediti chi ti manca, e basta.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-26",
+      "testo": "Oggi nota quante decisioni prendi prima delle nove.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-27",
+      "testo": "Oggi resta sveglio dieci minuti in più, al buio, senza schermi.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-28",
+      "testo": "Oggi accorgiti di quale rumore ti dà più fastidio.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 1,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-29",
+      "testo": "Oggi nota cosa fai quando nessuno ti guarda.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 2,
+      "cooldownGiorni": 60
+    },
+    {
+      "id": "int-30",
+      "testo": "Oggi chiediti se questa giornata ti somiglia.",
+      "categoria": "INTROSPETTIVO",
+      "livello": "DICHIARATA",
+      "contesto": "QUALSIASI",
+      "intensita": 3,
+      "cooldownGiorni": 60
+    }
+  ]
+}

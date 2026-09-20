@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">La Regola del Giorno</string>
+
+    <!-- I quattro segni. Non compaiono mai a schermo: sono la descrizione
+         per chi usa uno screen reader, e sono l'unico posto in cui lo stato
+         viene detto a parole. Niente toni di rimprovero nemmeno qui. -->
+    <string name="segno_attesa">in attesa</string>
+    <string name="segno_rispettata">rispettata</string>
+    <string name="segno_non_rispettata">non rispettata</string>
+    <string name="segno_non_valutabile">non valutabile</string>
+
+    <string name="torna_a_oggi">← oggi</string>
+    <string name="storico_titolo">gli ultimi trenta giorni</string>
+    <string name="storico_coda">I giorni precedenti restano registrati, ma non si scorrono da qui.</string>
+
+    <string name="composizione_titolo">quali regole ti riescono</string>
+    <string name="composizione_descrizione">%1$s: %2$d rispettate, %3$d non rispettate, %4$d non valutabili</string>
+
+    <string name="categoria_sociale">sociale</string>
+    <string name="categoria_fisico">fisico</string>
+    <string name="categoria_digitale">digitale</string>
+    <string name="categoria_creativo">creativo</string>
+    <string name="categoria_introspettivo">introspettivo</string>
+
+    <string name="impostazioni_titolo">impostazioni</string>
+    <string name="imp_mattino">Notifica del mattino</string>
+    <string name="imp_sera">Notifica della sera</string>
+    <string name="imp_confine">Il giorno inizia a</string>
+    <string name="imp_osservazione">Osservazione automatica</string>
+    <string name="attiva">attiva</string>
+    <string name="non_attiva">non attiva</string>
+    <string name="imp_nota">L\'osservazione automatica usa il contapassi del telefono, due letture al giorno. Nulla lascia il dispositivo.</string>
+
+    <string name="osservazione_spiegazione">Per osservare da solo le regole legate al movimento, il telefono legge il contapassi due volte al giorno: la mattina e la sera. Nient\'altro, e niente esce dal dispositivo.</string>
+    <string name="non_ora">Non ora</string>
+    <string name="continua">Continua</string>
+
+    <!-- Notifiche. La regola sta tutta nel titolo: aprire l'app non deve servire. -->
+    <string name="azione_si">Sì</string>
+    <string name="azione_no">No</string>
+</resources>

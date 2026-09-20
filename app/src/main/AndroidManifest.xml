@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Tre permessi. Nessun INTERNET: l'app non ha nulla da mandare da nessuna parte,
+         e l'assenza di questa riga e' verificabile da chiunque scarichi l'APK. -->
+
+    <!-- Runtime da API 33. Rifiutarlo non rompe l'app: la regola resta visibile aprendola. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Runtime da API 29. Chiesto solo quando l'utente attiva l'osservazione automatica. -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
+    <!-- Normale, nessun prompt. Serve a riprogrammare gli allarmi dopo il riavvio. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Il contapassi e' un di piu', non un requisito: l'app deve installarsi
+         anche sui dispositivi che non ce l'hanno. -->
+    <uses-feature
+        android:name="android.hardware.sensor.stepcounter"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.RegolaDelGiorno">
+
+        <activity
+            android:name=".ui.SchermataPrincipaleActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- exported="false": nessuno all'infuori dell'app puo' invocarli. -->
+        <receiver
+            android:name=".android.RicevitoreSveglia"
+            android:exported="false" />
+
+        <receiver
+            android:name=".android.RicevitoreRisposta"
+            android:exported="false" />
+
+        <!-- ACTION_MY_PACKAGE_REPLACED e' quello che si dimentica sempre:
+             aggiornare l'app cancella tutti gli allarmi pendenti. -->
+        <!-- exported="true" e' OBBLIGATORIO qui: un receiver con intent-filter per
+             broadcast di sistema non viene raggiunto se e' false, e il fallimento e'
+             silenzioso. Tutte e quattro le azioni sono protected broadcast: solo il
+             sistema puo' inviarle, quindi esportarlo non apre nulla. -->
+        <receiver
+            android:name=".android.RicevitoreRipristino"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>
