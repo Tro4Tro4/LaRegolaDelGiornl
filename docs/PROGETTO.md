@@ -242,7 +242,7 @@ di app ferma bastavano a lasciare aperti per sempre i giorni precedenti, fuori
 dallo storico valutato e fuori dalla mediana. E archiviava senza mai porre la
 domanda della sera, proprio sui dispositivi per cui esiste, registrando come
 «nessuna risposta» un silenzio che nessuno aveva chiesto di rompere. Da qui
-`MotivoIgnoto.MAI_CHIESTO` e `core/Recupero.kt`, che porta nel core la decisione
+`MotivoIgnoto.MAI_CHIESTO` e `core/.../Recupero.kt`, che porta nel core la decisione
 su quali giorni chiudere e a chi chiedere: nel worker non sarebbe verificabile
 senza un emulatore.
 

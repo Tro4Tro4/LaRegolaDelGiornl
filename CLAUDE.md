@@ -6,11 +6,14 @@ Tutto locale. Nessun account, nessuna rete, nessuna telemetria.
 Contesto completo, storia delle decisioni e verifiche: `docs/PROGETTO.md`.
 Non caricarlo salvo che serva: qui sotto c'è ciò che non si deduce dal codice.
 
+Come si tiene vero quello che il progetto dice di sé: `docs/MANUTENZIONE.md`.
+
 ## Comandi
 
 ```bash
 ./gradlew :core:test            # 111 test, gira senza SDK Android
 ./gradlew :app:assembleDebug
+python3 strumenti/coerenza.py   # cancello: numeri, invarianti, catalogo, font
 python3 strumenti/regole.py     # rigenera il catalogo (due artefatti)
 KOTLINC=<percorso> KOTLIN_STDLIB=<percorso> python3 strumenti/mutazioni.py
 ```
@@ -30,6 +33,16 @@ trovato tre volte test che passavano misurando la cosa sbagliata.
 reale, cerca lo stesso difetto altrove, formula l'ipotesi e verificala, solo
 allora correggi. Dopo tre tentativi falliti, fermati e proponi una revisione
 architetturale invece di continuare a rattoppare.
+
+**Il cancello prima di ogni commit.** `./gradlew :core:test` e
+`python3 strumenti/coerenza.py`, sempre; i mutanti prima di chiudere una fase.
+Il cancello verifica che quello che i documenti dichiarano sia ancora vero: è
+nato perché per mesi qui c'è stato scritto un numero di mutanti che non
+corrispondeva a quelli esistenti, e nessun test poteva accorgersene.
+
+**Chi cambia un comportamento aggiorna il mutante che lo proteggeva**, e chi ne
+aggiunge uno aggiunge il mutante che lo rompe. Le altre regole di manutenzione
+stanno in `docs/MANUTENZIONE.md`.
 
 **Revisione finale** da revisore esterno, problemi ordinati per gravità.
 

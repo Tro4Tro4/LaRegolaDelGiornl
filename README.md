@@ -39,8 +39,10 @@ app/     Tutto ciò che tocca Android: Room, DataStore, allarmi,
 strumenti/
   regole.py      unica sorgente del catalogo
   mutazioni.py   mutation testing senza Gradle
+  coerenza.py    cancello: verifica che i documenti dicano ancora il vero
 docs/
   PROGETTO.md    decisioni, verifiche, cose aperte
+  MANUTENZIONE.md  le regole per tenere vero tutto il resto
 ```
 
 La separazione non è estetica. `:core` non può dipendere da Android per
@@ -57,6 +59,7 @@ Serve JDK 17 e l'SDK Android con le build tools 36.
 ```bash
 gradle wrapper --gradle-version 9.1     # il wrapper non è incluso
 ./gradlew :core:test                    # gira senza SDK Android
+python3 strumenti/coerenza.py           # non richiede nulla, nemmeno Java
 ./gradlew :app:assembleDebug
 ```
 
