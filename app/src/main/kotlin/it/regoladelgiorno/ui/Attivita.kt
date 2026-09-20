@@ -16,11 +16,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import it.regoladelgiorno.android.Dipendenze
+import it.regoladelgiorno.android.Notifiche
 import it.regoladelgiorno.android.Sveglie
 import it.regoladelgiorno.core.GiornoSalvato
 import it.regoladelgiorno.core.Tempo
@@ -118,6 +120,28 @@ private fun Applicazione(modello: ModelloRegola = viewModel()) {
     val richiestaPermesso = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { concesso -> modello.impostaOsservazione(concesso) }
+
+    // L'app vive nelle notifiche: la regola arriva la mattina e la domanda la sera,
+    // senza che aprire l'app sia necessario. Da API 33 il permesso non e' concesso
+    // all'installazione, e senza richiederlo l'app resterebbe muta per sempre —
+    // in silenzio, perche' notify() non segnala nulla quando il permesso manca.
+    //
+    // Si chiede all'avvio e senza preamboli, al contrario dell'osservazione
+    // automatica: quella e' una lettura di sensori e va spiegata prima, questa e'
+    // il canale stesso dell'app. Rifiutarla non rompe niente: la regola resta
+    // visibile aprendo l'app, ed e' il sistema a non riproporre piu' la richiesta.
+    val contesto = LocalContext.current
+    val richiestaNotifiche = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { /* concesso o no, l'app funziona lo stesso */ }
+
+    LaunchedEffect(Unit) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            !Notifiche.permessoNotifiche(contesto)
+        ) {
+            richiestaNotifiche.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     BackHandler(enabled = suStorico || spiegazioneAperta) {
         if (spiegazioneAperta) spiegazioneAperta = false else suStorico = false

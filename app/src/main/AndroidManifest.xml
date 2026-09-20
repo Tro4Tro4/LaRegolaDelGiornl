@@ -19,8 +19,12 @@
         android:name="android.hardware.sensor.stepcounter"
         android:required="false" />
 
+    <!-- allowBackup="false" non e' prudenza generica: l'app dice all'utente, in due
+         punti dell'interfaccia, che niente esce dal dispositivo. Con il backup
+         automatico lo storico finirebbe su Google Drive, e quella frase sarebbe
+         falsa. Costo accettato: cambiando telefono si riparte da zero. -->
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.RegolaDelGiorno">

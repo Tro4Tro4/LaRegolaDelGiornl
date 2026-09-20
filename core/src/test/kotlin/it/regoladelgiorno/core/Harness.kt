@@ -17,7 +17,7 @@ fun raccogliCasi(): List<Pair<String, () -> Unit>> {
     casi.clear()
     testTempo(); testCatalogo(); testSelezione(); testValutazione()
     testMotore(); testPianificatore(); testTipometria(); testComposizione()
-    testSegno(); testCatalogoReale()
+    testSegno(); testRecupero(); testCatalogoReale()
     return casi.toList()
 }
 

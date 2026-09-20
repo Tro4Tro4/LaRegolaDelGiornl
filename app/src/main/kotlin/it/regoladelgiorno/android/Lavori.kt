@@ -8,6 +8,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import it.regoladelgiorno.core.Motore
 import it.regoladelgiorno.core.Pianificatore
+import it.regoladelgiorno.core.Recupero
 import it.regoladelgiorno.core.Tempo
 import it.regoladelgiorno.core.Verdetto
 import java.time.Instant
@@ -105,9 +106,27 @@ class LavoroControllo(context: Context, parametri: WorkerParameters) :
             Notifiche.mattutina(applicationContext, g.testo)
         }
 
-        val ieri = oggi - 1
-        if (Pianificatore.seraPassata(adesso, zona, orari, ieri)) {
-            app.archivio.leggi(ieri)?.takeIf { it.aperto }?.let { app.motore.chiudi(ieri) }
+        // Tutti i giorni rimasti aperti, non solo ieri: con il solo controllo su
+        // ieri, due giorni di app ferma bastavano a lasciare aperto per sempre
+        // tutto cio' che stava piu' indietro, in attesa nello storico e fuori
+        // dalla mediana personale, perche' senza la lettura della sera il delta
+        // non esiste. Quali chiudere e a chi chiedere lo decide Recupero, dove
+        // e' verificabile senza emulatore. La finestra e' quella dello storico:
+        // oltre, il recupero non ha piu' senso.
+        val aperti = (app.archivio.precedenti(oggi, Motore.FINESTRA_STORICO) +
+            listOfNotNull(app.archivio.leggi(oggi)))
+            .filter { it.aperto }
+            .map { it.giornoLogico }
+
+        for ((giorno, conDomanda) in Recupero.daChiudere(oggi, aperti, adesso, zona, orari)) {
+            val chiuso = app.motore.chiudi(giorno, conDomanda) ?: continue
+            // Senza questa notifica il recupero chiudeva la giornata in silenzio, e
+            // proprio sui dispositivi per cui la rete di sicurezza esiste l'utente
+            // non vedeva mai la domanda della sera.
+            if (conDomanda && chiuso.verdetto == Verdetto.IGNOTO) {
+                Notifiche.assicuraCanale(applicationContext)
+                Notifiche.serale(applicationContext, chiuso.giornoLogico, chiuso.testo)
+            }
         }
 
         Sveglie.riprogrammaTutto(applicationContext, orari, zona)
