@@ -262,9 +262,25 @@ copriva l'ultimo gradino del rilassamento dei vincoli, quello in cui resta solo
 il cooldown: il ciclo poteva fermarsi un gradino prima e servire una regola che
 stava ancora riposando. Il caso mancava, ed è stato aggiunto.
 
-**Il glifo `←` non è nel font.** Il sottoinsieme mappa 327 codepoint e non
-include `U+2190`. L'unico comando di ritorno dello storico cade sul fallback di
-sistema, con peso e allineamento diversi da Literata. Non ancora risolto.
+**Il glifo `←` non era nel font.** Il sottoinsieme mappa 327 codepoint e non
+include `U+2190`: l'unico comando di ritorno dello storico cadeva sul fallback di
+sistema, con peso e allineamento diversi da Literata. Sostituito con il caporale
+`«`, che nel font c'è. Prima di cambiare un segno, verificare che il
+sottoinsieme lo contenga: il fallback non segnala nulla.
+
+**Il caricatore del catalogo moriva invece di degradare.** Il `valueOf` avveniva
+prima della validazione, e in release il validatore non gira: una categoria
+sbagliata fermava l'avvio, mentre il commento prometteva l'opposto. Ora la riga
+illeggibile viene saltata, e in debug le righe saltate fanno fallire il check.
+
+**R8 poteva rinominare gli enum del dominio.** I loro nomi finiscono nel
+database come TEXT e nel JSON del catalogo: un aggiornamento che cambia la
+mappatura renderebbe illeggibile il database già sul telefono. Regola aggiunta.
+
+**Lo specchio Kotlin del catalogo non riportava il `cooldownGiorni`.** Oggi sono
+tutti 60 e il default coincide, quindi non si vedeva; il giorno che una regola ne
+avrà uno diverso, i test validerebbero un catalogo che non è quello spedito. Ora
+lo script lo scrive sempre.
 
 ### Una decisione ribaltata
 

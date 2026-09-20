@@ -85,8 +85,6 @@ per scriverci dentro.
   codice diverso da zero se un mutante sopravvive **o se non si applica**, e un
   mutante che non si applica è il modo in cui una suite si svuota in silenzio —
   tre lo erano diventati, e nessuno se n'era accorto
-- Il glifo `←` di `torna_a_oggi` non è nel font sottoinsiemato: cade sul
-  fallback di sistema, con peso e allineamento diversi da Literata
 
 `strumenti/regole.py` produce **due** artefatti che devono restare allineati:
 il JSON spedito e lo specchio Kotlin che i test validano. Senza quel

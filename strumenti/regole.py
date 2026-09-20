@@ -199,9 +199,13 @@ with open(ASSET, "w", encoding="utf-8") as f:
 
 # --- file Kotlin per far girare il validatore VERO sul contenuto reale
 def kt(r):
+    # Il cooldown si scrive sempre, anche quando coincide con il default: se un
+    # domani una regola ne avra' uno diverso, lo specchio deve dirlo, altrimenti
+    # i test validerebbero un catalogo che non e' quello spedito.
     extra = ""
     if "metrica" in r:
         extra = f", metrica = Metrica.{r['metrica']}, soglia = {r['soglia']}"
+    extra += f", cooldownGiorni = {r['cooldownGiorni']}"
     testo = r["testo"].replace("\\", "\\\\").replace('"', '\\"').replace("$", "\\$")
     return (f'    Regola("{r["id"]}", "{testo}", Categoria.{r["categoria"]}, '
             f'Livello.{r["livello"]}, Contesto.{r["contesto"]}, {r["intensita"]}{extra}),')

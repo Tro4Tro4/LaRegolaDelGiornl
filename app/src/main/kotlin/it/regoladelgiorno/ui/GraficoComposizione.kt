@@ -119,8 +119,11 @@ private fun Barra(riga: RigaCategoria, colore: Color, modifier: Modifier = Modif
 
         drawRect(colore, topLeft = Offset.Zero, size = androidx.compose.ui.geometry.Size(pieno, size.height))
         tratteggio(colore, pieno, rigato)
-        if (vuoto > 0.5f) {
-            val bordo = 1.dp.toPx()
+        // Il contorno si disegna solo se il segmento e' piu' largo del suo stesso
+        // bordo: sotto quella soglia vuoto - bordo diventa negativo, e un rettangolo
+        // di larghezza negativa non e' un rettangolo piccolo, e' un disegno sbagliato.
+        val bordo = 1.dp.toPx()
+        if (vuoto > bordo) {
             drawRect(
                 color = colore.copy(alpha = colore.alpha * 0.5f),
                 topLeft = Offset(pieno + rigato + bordo / 2f, bordo / 2f),
