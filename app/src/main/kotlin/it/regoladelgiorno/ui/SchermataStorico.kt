@@ -1,6 +1,7 @@
 package it.regoladelgiorno.ui
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.text.format.DateFormat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,6 +39,7 @@ import it.regoladelgiorno.core.Composizione
 import it.regoladelgiorno.core.GiornoSalvato
 import it.regoladelgiorno.core.segnoDi
 import java.time.LocalTime
+import java.util.Calendar
 
 /**
  * Una sola schermata con tre livelli di stacco, non tre sezioni uguali:
@@ -151,8 +153,6 @@ private fun Impostazioni(
     val colori = LocalColori.current
     val tipi = LocalTipi.current
     val contesto = LocalContext.current
-    val ore24 = remember { DateFormat.is24HourFormat(contesto) }
-
     fun apriSelettore(chiave: ChiaveOrario, attuale: LocalTime) {
         // Selettore di sistema: nessuna dipendenza aggiunta, rispetta lingua,
         // formato orario e screen reader del dispositivo. E' un'impostazione
@@ -161,7 +161,9 @@ private fun Impostazioni(
         TimePickerDialog(
             contesto,
             { _, ora, minuto -> cambiaOrario(chiave, LocalTime.of(ora, minuto)) },
-            attuale.hour, attuale.minute, ore24
+            // letto all'apertura, non memorizzato: l'impostazione di sistema puo'
+            // cambiare mentre l'app e' viva, e un valore ricordato resterebbe vecchio
+            attuale.hour, attuale.minute, DateFormat.is24HourFormat(contesto)
         ).show()
     }
 
@@ -169,13 +171,13 @@ private fun Impostazioni(
         Filo()
         Titolo(stringResource(R.string.impostazioni_titolo), Modifier.padding(top = 22.dp))
 
-        Opzione(stringResource(R.string.imp_mattino), formatta(orari.mattino, ore24)) {
+        Opzione(stringResource(R.string.imp_mattino), formatta(contesto, orari.mattino)) {
             apriSelettore(ChiaveOrario.MATTINO, orari.mattino)
         }
-        Opzione(stringResource(R.string.imp_sera), formatta(orari.sera, ore24)) {
+        Opzione(stringResource(R.string.imp_sera), formatta(contesto, orari.sera)) {
             apriSelettore(ChiaveOrario.SERA, orari.sera)
         }
-        Opzione(stringResource(R.string.imp_confine), formatta(orari.confine, ore24)) {
+        Opzione(stringResource(R.string.imp_confine), formatta(contesto, orari.confine)) {
             apriSelettore(ChiaveOrario.CONFINE, orari.confine)
         }
         Opzione(
@@ -192,12 +194,19 @@ private fun Impostazioni(
     }
 }
 
-private fun formatta(ora: LocalTime, ore24: Boolean): String =
-    if (ore24) "%02d:%02d".format(ora.hour, ora.minute)
-    else {
-        val h = if (ora.hour % 12 == 0) 12 else ora.hour % 12
-        "%d:%02d %s".format(h, ora.minute, if (ora.hour < 12) "AM" else "PM")
+/**
+ * Il formato dell'ora lo decide il sistema, non l'app. "AM" e "PM" scritti a mano
+ * restano in inglese su un telefono in un'altra lingua, e l'app usa il selettore
+ * di sistema proprio per non imporre convenzioni proprie: formattare il risultato
+ * da se' rimetterebbe dalla finestra cio' che si e' fatto uscire dalla porta.
+ */
+private fun formatta(contesto: Context, ora: LocalTime): String {
+    val quando = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, ora.hour)
+        set(Calendar.MINUTE, ora.minute)
     }
+    return DateFormat.getTimeFormat(contesto).format(quando.time)
+}
 
 @Composable
 private fun Opzione(nome: String, valore: String, onClick: () -> Unit) {

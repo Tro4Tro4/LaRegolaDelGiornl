@@ -37,26 +37,39 @@ object CaricatoreCatalogo {
         val testo = context.assets.open(nomeFile).bufferedReader().use { it.readText() }
         val elenco = JSONObject(testo).getJSONArray("regole")
 
-        val regole = (0 until elenco.length()).map { i ->
+        // Una riga illeggibile viene saltata, non fatta esplodere: il parsing
+        // avviene PRIMA della validazione, quindi un valueOf su una categoria
+        // sbagliata fermerebbe l'avvio senza che il validatore possa dire nulla,
+        // e in release il validatore non gira nemmeno.
+        val righe = (0 until elenco.length()).mapNotNull { i ->
             val o = elenco.getJSONObject(i)
-            Regola(
-                id = o.getString("id"),
-                testo = o.getString("testo"),
-                categoria = Categoria.valueOf(o.getString("categoria")),
-                livello = Livello.valueOf(o.getString("livello")),
-                contesto = Contesto.valueOf(o.optString("contesto", Contesto.QUALSIASI.name)),
-                intensita = o.optInt("intensita", 1),
-                metrica = o.optString("metrica").takeIf { it.isNotEmpty() }?.let(Metrica::valueOf),
-                soglia = if (o.has("soglia")) o.getInt("soglia") else null,
-                cooldownGiorni = o.optInt("cooldownGiorni", 60)
-            )
+            try {
+                Regola(
+                    id = o.getString("id"),
+                    testo = o.getString("testo"),
+                    categoria = Categoria.valueOf(o.getString("categoria")),
+                    livello = Livello.valueOf(o.getString("livello")),
+                    contesto = Contesto.valueOf(o.optString("contesto", Contesto.QUALSIASI.name)),
+                    intensita = o.optInt("intensita", 1),
+                    metrica = o.optString("metrica").takeIf { it.isNotEmpty() }?.let(Metrica::valueOf),
+                    soglia = if (o.has("soglia")) o.getInt("soglia") else null,
+                    cooldownGiorni = o.optInt("cooldownGiorni", 60)
+                )
+            } catch (e: RuntimeException) {
+                android.util.Log.w("Catalogo", "riga $i illeggibile, saltata: ${e.message}")
+                null
+            }
         }
 
-        // In debug il catalogo rotto deve fermare l'app subito e rumorosamente.
-        // In release si spedisce cio' che c'e': meglio una regola strana che
+        // In debug il catalogo rotto deve fermare l'app subito e rumorosamente,
+        // comprese le righe saltate: in release nessuno le vedrebbe piu'.
+        // In release si spedisce cio' che c'e': meglio una regola in meno che
         // un'applicazione che non parte.
         if (BuildConfig.DEBUG) {
-            val referto = Catalogo.valida(regole)
+            check(righe.size == elenco.length()) {
+                "catalogo: ${elenco.length() - righe.size} righe non leggibili su ${elenco.length()}"
+            }
+            val referto = Catalogo.valida(righe)
             check(referto.valido) {
                 "catalogo non valido:\n" + referto.errori.joinToString("\n") {
                     "  ${it.regolaId}: ${it.descrizione}"
@@ -66,7 +79,7 @@ object CaricatoreCatalogo {
                 android.util.Log.w("Catalogo", "${it.regolaId}: ${it.descrizione}")
             }
         }
-        return regole
+        return righe
     }
 }
 

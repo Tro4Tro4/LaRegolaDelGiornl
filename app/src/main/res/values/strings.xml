@@ -10,7 +10,10 @@
     <string name="segno_non_rispettata">non rispettata</string>
     <string name="segno_non_valutabile">non valutabile</string>
 
-    <string name="torna_a_oggi">← oggi</string>
+    <!-- Il caporale, non la freccia: U+2190 non e' nel font sottoinsiemato e
+         cadrebbe sul fallback di sistema, con peso e allineamento diversi da
+         Literata. Verificare nel font prima di cambiarlo. -->
+    <string name="torna_a_oggi">« oggi</string>
     <string name="storico_titolo">gli ultimi trenta giorni</string>
     <string name="storico_coda">I giorni precedenti restano registrati, ma non si scorrono da qui.</string>
 

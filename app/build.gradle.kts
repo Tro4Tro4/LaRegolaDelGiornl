@@ -63,7 +63,9 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui)
     debugImplementation(libs.compose.ui.tooling)
-    implementation(libs.compose.ui.tooling.preview)
+    // Niente ui-tooling-preview finche' non esiste una @Preview: oggi non ce n'e'
+    // nessuna, e in implementation finirebbe nell'APK di release. Riaggiungerlo
+    // insieme alla prima anteprima, non prima.
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
