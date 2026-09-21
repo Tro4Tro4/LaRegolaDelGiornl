@@ -96,6 +96,6 @@ fun TemaRegola(
     CompositionLocalProvider(
         LocalColori provides if (scuro) INCHIOSTRO else CARTA,
         LocalTipi provides TIPI,
-        contenuto = contenuto
+        content = contenuto
     )
 }

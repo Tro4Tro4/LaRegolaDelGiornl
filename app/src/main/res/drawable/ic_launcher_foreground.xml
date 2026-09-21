@@ -1,0 +1,11 @@
+<!-- SEGNAPOSTO. Cerchio vuoto: lo stesso segno che l'app usa per "in attesa".
+     Il contenuto sta dentro la zona sicura di 66dp dei 108dp adattivi. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M54,27a27,27 0 1,0 0,54a27,27 0 1,0 0,-54zM54,34a20,20 0 1,1 0,40a20,20 0 1,1 0,-40z" />
+</vector>

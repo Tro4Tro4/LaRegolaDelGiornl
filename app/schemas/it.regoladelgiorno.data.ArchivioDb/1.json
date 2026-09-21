@@ -1,0 +1,108 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "d03a5abaa483bb36a58711d47cbf90dd",
+    "entities": [
+      {
+        "tableName": "giorno",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`giorno_logico` INTEGER NOT NULL, `regola_id` TEXT NOT NULL, `testo` TEXT NOT NULL, `categoria` TEXT NOT NULL, `livello` TEXT NOT NULL, `intensita` INTEGER NOT NULL, `metrica` TEXT, `soglia` INTEGER, `verdetto` TEXT NOT NULL, `fonte` TEXT NOT NULL, `motivo` TEXT, `passi_mattina` INTEGER, `realtime_mattina` INTEGER, `passi_sera` INTEGER, `realtime_sera` INTEGER, PRIMARY KEY(`giorno_logico`))",
+        "fields": [
+          {
+            "fieldPath": "giornoLogico",
+            "columnName": "giorno_logico",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "regolaId",
+            "columnName": "regola_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "testo",
+            "columnName": "testo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoria",
+            "columnName": "categoria",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "livello",
+            "columnName": "livello",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "intensita",
+            "columnName": "intensita",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "metrica",
+            "columnName": "metrica",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "soglia",
+            "columnName": "soglia",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "verdetto",
+            "columnName": "verdetto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fonte",
+            "columnName": "fonte",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "motivo",
+            "columnName": "motivo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "passiMattina",
+            "columnName": "passi_mattina",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "realtimeMattina",
+            "columnName": "realtime_mattina",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "passiSera",
+            "columnName": "passi_sera",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "realtimeSera",
+            "columnName": "realtime_sera",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "giorno_logico"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd03a5abaa483bb36a58711d47cbf90dd')"
+    ]
+  }
+}

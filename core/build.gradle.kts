@@ -15,6 +15,8 @@ kotlin {
 
 dependencies {
     testImplementation(libs.junit.jupiter)
+    // Da Gradle 9 il launcher non e' piu' aggiunto d'ufficio al classpath di runtime.
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.test {

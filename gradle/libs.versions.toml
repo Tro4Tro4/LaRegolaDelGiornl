@@ -5,7 +5,7 @@
 agp = "9.0.1"
 kotlin = "2.2.10"          # versione che AGP 9.0 usa internamente
 ksp = "2.2.10-2.0.2"       # DA VERIFICARE: il suffisso KSP cambia a ogni patch di Kotlin
-composeBom = "2026.08.00"
+composeBom = "2026.06.01"  # Compose 1.11.4: la 2026.08.00 porta 1.12.0, che pretende AGP 9.1+ e compileSdk 37
 room = "2.7.2"
 work = "2.10.1"
 datastore = "1.1.7"
@@ -14,6 +14,7 @@ lifecycle = "2.9.1"
 coreKtx = "1.16.0"
 desugar = "2.1.5"
 junit = "5.11.4"
+junitPlatform = "1.11.4"   # allineata a junit 5.11.4: da Gradle 9 il launcher va dichiarato
 
 [libraries]
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -36,6 +37,7 @@ datastore-preferences = { group = "androidx.datastore", name = "datastore-prefer
 desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugar" }
 
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junitPlatform" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
