@@ -1,5 +1,7 @@
-<!-- SEGNAPOSTO. Cerchio vuoto: lo stesso segno che l'app usa per "in attesa".
-     Il contenuto sta dentro la zona sicura di 66dp dei 108dp adattivi. -->
+<!-- Cerchio vuoto: lo stesso segno che l'app usa per "in attesa" e che gia'
+     porta la notifica. Spessore del filo identico a ic_notifica (6,2/8,4).
+     Diametro 54dp sui 108 del piano adattivo: sta dentro la zona sicura di
+     66dp qualunque maschera applichi il launcher. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
@@ -7,5 +9,5 @@
     android:viewportHeight="108">
     <path
         android:fillColor="#FF000000"
-        android:pathData="M54,27a27,27 0 1,0 0,54a27,27 0 1,0 0,-54zM54,34a20,20 0 1,1 0,40a20,20 0 1,1 0,-40z" />
+        android:pathData="M54,27a27,27 0 1,0 0,54a27,27 0 1,0 0,-54zM54,34.07a19.93,19.93 0 1,1 0,39.86a19.93,19.93 0 1,1 0,-39.86z" />
 </vector>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Deliberatamente separato da @color/fondo: quello ha una variante in
+         values-night, e uno sfondo d'icona che segue il tema di sistema
+         renderebbe il cerchio nero invisibile su fondo scuro. -->
+    <color name="ic_launcher_background">#FFFFFFFF</color>
+</resources>
