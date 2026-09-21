@@ -62,6 +62,17 @@ class ModelloRegola(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val c = Dipendenze.di(getApplication())
 
+            // Gli allarmi non esistono finche' qualcuno non li crea, e dopo
+            // l'installazione nessun altro lo fa: riallinea() risponde al riavvio
+            // e all'aggiornamento, i lavoratori li sveglia un allarme che ancora
+            // non c'e', cambiaOrario() presuppone che l'utente tocchi un orario.
+            // Senza questa riga un'app che vive nelle notifiche resta muta per
+            // sempre, e in silenzio, perche' non c'e' niente che segnali l'assenza
+            // di un allarme mai programmato. Ripeterlo a ogni avvio non costa:
+            // FLAG_UPDATE_CURRENT sovrascrive i pendenti invece di accumularli, e
+            // la rete di sicurezza e' accodata in KEEP.
+            Sveglie.riprogrammaTutto(getApplication(), c.orari())
+
             // apri() e' idempotente: qui serve da recupero, per i dispositivi
             // dove l'allarme del mattino non e' mai arrivato.
             launch {
