@@ -160,10 +160,17 @@ Tieni i mutanti allineati al codice: uno che non si applica non verifica nulla e
 non lo dice. Tre lo erano diventati e la cifra è rimasta sbagliata per mesi. Ora
 lo script fallisce anche per quello.
 
-Il modulo `app` non è **mai stato compilato**. Il primo build troverà errori.
-Candidati più probabili: il suffisso di KSP nel version catalog, la firma di
-`clickable` senza `indication`, e il `collectLatest` annidato nel ViewModel, che
-riavvia l'osservazione del giorno a ogni cambio di impostazione.
+Il modulo `app` è compilato, installato ed eseguito su dispositivo dal 21
+settembre 2026. Nessuno dei tre guasti previsti si è verificato: il suffisso di
+KSP risolve, `clickable` senza `indication` compila, le API di `WindowInsets`
+sono al loro posto.
+
+Resta però vero il difetto di progetto che stava in quell'elenco: il
+`collectLatest` annidato nel ViewModel riavvia l'osservazione del giorno a ogni
+cambio di impostazione. Compila, e sbaglia lo stesso.
+
+Non ancora esercitato: il ramo del contapassi. Finora sono uscite solo regole
+non osservabili, quindi il sensore non è mai entrato in gioco.
 
 Da misurare su dispositivo, non deducibile: se rispondere alla notifica serale
 conta come interazione ai fini dell'ibernazione. L'app è progettata per non
