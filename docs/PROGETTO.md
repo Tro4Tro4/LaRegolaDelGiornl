@@ -114,10 +114,12 @@ secondo è irrilevante.
 **Play richiede targetSdk 36** dal 31 agosto 2026 per nuove app e
 aggiornamenti.
 
-**AGP 9.0** (gennaio 2026) supporta al massimo API 36, richiede Gradle 9.1 e
-JDK 17, e ha il **supporto Kotlin integrato**: il plugin
-`org.jetbrains.kotlin.android` non va applicato e non è compatibile col nuovo
-DSL.
+**AGP 9.4.1** richiede Gradle 9.6 o superiore (qui 9.7.1) e JDK 17, e ha il
+**supporto Kotlin integrato**: il plugin `org.jetbrains.kotlin.android` non va
+applicato e non è compatibile col nuovo DSL. Il progetto è nato su AGP 9.0,
+che si fermava ad API 36; la salita a 9.4.1 ha sbloccato `compileSdk 37`, che
+la BOM Compose 2026.09 pretende. `targetSdk` resta 36: cambiarlo tocca il
+comportamento a runtime, non le API compilabili.
 
 **`exported="false"` su un receiver di broadcast di sistema lo rende
 irraggiungibile**, in silenzio. Esiste un bug report di notifiche che smettono

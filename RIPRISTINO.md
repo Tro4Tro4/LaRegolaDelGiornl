@@ -28,16 +28,17 @@ Fallo **prima** di lanciare Claude Code. Senza cronologia non puoi vedere cosa
 ha cambiato né tornare indietro, ed è la rete di sicurezza più importante che
 hai quando deleghi modifiche.
 
-## 3. Genera il wrapper Gradle
+## 3. Il wrapper Gradle
 
-Non è incluso: sono binari che è meglio generare sulla propria macchina.
+Ora è nel repository, sulla 9.7.1: non serve più generarlo, e non serve Gradle
+installato. Per rigenerarlo dopo un cambio di versione:
 
 ```bash
-gradle wrapper --gradle-version 9.1
+./gradlew wrapper --gradle-version <versione>
 ```
 
-Serve Gradle installato. Se non ce l'hai, apri il progetto una volta in Android
-Studio: lo genera da solo.
+Attenzione: le versioni di Gradle hanno tre cifre. `9.1` non esiste come nome
+di distribuzione, `9.1.0` sì.
 
 ## 4. Verifica che il core giri
 
@@ -45,7 +46,7 @@ Studio: lo genera da solo.
 ./gradlew :core:test
 ```
 
-**Questo comando non richiede l'SDK Android.** Deve dare 99 test verdi. Se
+**Questo comando non richiede l'SDK Android.** Deve dare 111 test verdi. Se
 fallisce, il problema è il toolchain (serve JDK 17), non il codice: quei test
 sono stati eseguiti davvero.
 
@@ -58,20 +59,18 @@ da "il codice Android ha problemi".
 ./gradlew :app:assembleDebug
 ```
 
-**Aspettati che fallisca.** Il modulo `app` non è mai stato compilato: niente
-SDK Android nell'ambiente in cui è stato scritto. Gli errori sono previsti,
-non sono un sintomo che qualcosa sia andato storto nella migrazione.
+Adesso passa. Ha smesso di fallire il 21 settembre 2026, e le tre cause che
+questo documento prevedeva non erano nessuna delle tre: il suffisso di KSP
+risolve, `clickable` senza `indication` compila, le API di `WindowInsets` sono
+al loro posto. Quello che fermava il build era altro, ed è nella cronologia
+di git.
 
-Dove guardare per primo, in ordine di probabilità:
+Resta una sola dipendenza dall'ambiente: la prima esecuzione scarica Gradle,
+la piattaforma android-37 e le build tools, quindi dura parecchi minuti e
+vuole rete.
 
-1. **Il suffisso di KSP** in `gradle/libs.versions.toml`. Cambia a ogni patch
-   di Kotlin ed è l'unica versione che non è stato possibile verificare.
-2. **La firma di `clickable` senza `indication`**, cambiata fra le versioni di
-   Compose. In `Spiegazione.kt` è usata la forma breve.
-3. **Le API di `WindowInsets`**, i cui nomi si sono spostati più volte.
-
-Mancano due risorse: l'icona del launcher (generala con Image Asset di Android
-Studio) e, se vuoi, un `values-v31` per lo splash.
+Manca ancora, se lo vuoi, un `values-v31` per lo splash. L'icona del launcher
+c'è.
 
 ## 6. Avvia Claude Code
 
@@ -128,5 +127,6 @@ considerare chiusa qualunque modifica al modulo `:core`.
 
 ## Requisiti
 
-JDK 17. SDK Android con build tools 36. Python 3 per gli script. Gradle 9.1 o
-il wrapper. Android Studio per il primo build — dopo, VS Code va benissimo.
+JDK 17 — va bene il JBR che Android Studio si porta dietro. SDK Android: la
+piattaforma android-37 e le build tools le scarica Gradle da solo. Python 3
+per gli script. Il wrapper è incluso, Gradle installato non serve.

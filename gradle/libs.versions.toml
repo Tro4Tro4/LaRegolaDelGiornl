@@ -1,11 +1,12 @@
 # Versioni verificate a settembre 2026.
-# AGP 9.0 e' uscito a gennaio 2026: supporta al massimo API 36, richiede
-# Gradle 9.1 e JDK 17, e porta il supporto Kotlin INTEGRATO (vedi app/build.gradle.kts).
+# AGP 9.x porta il supporto Kotlin INTEGRATO (vedi app/build.gradle.kts) e
+# richiede JDK 17. La 9.4.1 continua a incorporare Kotlin 2.2.10, come la 9.0:
+# salire di AGP non obbliga a muovere ne' il plugin Compose ne' KSP.
 [versions]
-agp = "9.0.1"
+agp = "9.4.1"
 kotlin = "2.2.10"          # versione che AGP 9.0 usa internamente
 ksp = "2.2.10-2.0.2"       # DA VERIFICARE: il suffisso KSP cambia a ogni patch di Kotlin
-composeBom = "2026.06.01"  # Compose 1.11.4: la 2026.08.00 porta 1.12.0, che pretende AGP 9.1+ e compileSdk 37
+composeBom = "2026.09.00"  # Compose 1.12.1: pretende AGP 9.1+ e compileSdk 37, entrambi soddisfatti
 room = "2.7.2"
 work = "2.10.1"
 datastore = "1.1.7"

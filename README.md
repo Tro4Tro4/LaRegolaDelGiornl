@@ -17,11 +17,13 @@ all'utente sarebbe falsa.
 |---|---|
 | Logica di dominio | 111 test, 33 mutanti uccisi su 33 |
 | Catalogo | 150 regole validate, simulate su tre anni d'uso |
-| Layer Android | scritto, **mai compilato** |
-| Interfaccia Compose | scritta, **mai compilata** |
+| Layer Android | compilato, installato, eseguito su dispositivo |
+| Interfaccia Compose | compilata ed eseguita |
 
-Il modulo `:core` è stato compilato ed eseguito davvero. Tutto ciò che
-dipende dall'SDK Android no: il primo build troverà errori, ed è previsto.
+Il primo build su hardware vero è avvenuto il 21 settembre 2026. La catena
+allarme → notifica → risposta → scrittura ha chiuso il giro almeno una volta.
+Resta non collaudato il ramo del contapassi: finora sono uscite solo regole
+non osservabili.
 
 **Migrazione su Claude Code:** leggi `RIPRISTINO.md`.
 Contesto completo e storia delle decisioni: `docs/PROGETTO.md`.
@@ -54,10 +56,10 @@ di compilare — effetto voluto.
 
 ## Primo avvio
 
-Serve JDK 17 e l'SDK Android con le build tools 36.
+Serve JDK 17 e l'SDK Android. Le build tools e la piattaforma android-37
+le scarica Gradle da solo al primo build.
 
 ```bash
-gradle wrapper --gradle-version 9.1     # il wrapper non è incluso
 ./gradlew :core:test                    # gira senza SDK Android
 python3 strumenti/coerenza.py           # non richiede nulla, nemmeno Java
 ./gradlew :app:assembleDebug
@@ -98,14 +100,17 @@ in mano agli utenti.
 
 ## Versioni
 
-Verificate a settembre 2026. AGP 9.0 è uscito a gennaio 2026: supporta al
-massimo API 36, richiede Gradle 9.1 e JDK 17, e porta il **supporto Kotlin
-integrato** — il plugin `org.jetbrains.kotlin.android` non va applicato e
-non è compatibile con il nuovo DSL.
+AGP 9.4.1 con Gradle 9.7.1, `compileSdk 37`, JDK 17. AGP 9 porta il
+**supporto Kotlin integrato** — il plugin `org.jetbrains.kotlin.android` non
+va applicato e non è compatibile con il nuovo DSL. La 9.4.1 incorpora ancora
+Kotlin 2.2.10, come la 9.0: salire di AGP non obbliga a muovere il plugin
+Compose né KSP.
 
-L'unica versione che non ho potuto verificare è il suffisso di KSP, che
-cambia a ogni patch di Kotlin. È il primo posto dove guardare se il build
-fallisce sulla risoluzione dei plugin.
+Il suffisso di KSP, che a lungo è rimasto l'unica versione non verificata,
+risolve: `2.2.10-2.0.2` esiste. KSP però registra le sorgenti generate via
+`kotlin.sourceSets`, che il Kotlin integrato vieta, e serve
+`android.disallowKotlinSourceSets=false` in `gradle.properties` finché non
+sarà allineato.
 
 ---
 

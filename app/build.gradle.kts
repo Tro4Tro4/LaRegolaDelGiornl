@@ -11,12 +11,15 @@ plugins {
 
 android {
     namespace = "it.regoladelgiorno"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "it.regoladelgiorno"
         minSdk = 23      // il minimo che le librerie AndroidX ancora supportano
-        targetSdk = 36   // richiesto da Google Play; AGP 9.0 non va oltre
+        // Alzarlo non e' piu' bloccato dall'AGP, ma e' un'altra decisione:
+        // targetSdk cambia il comportamento a runtime, compileSdk solo le API
+        // che si possono chiamare.
+        targetSdk = 36   // richiesto da Google Play
         versionCode = 1
         versionName = "1.0"
     }
