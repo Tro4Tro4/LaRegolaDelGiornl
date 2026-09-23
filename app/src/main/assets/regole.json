@@ -3,7 +3,7 @@
   "regole": [
     {
       "id": "soc-01",
-      "testo": "Oggi ringrazia qualcuno per una cosa fatta più di un anno fa.",
+      "testo": "Oggi ringrazia qualcuno per una cosa che ha fatto più di un anno fa.",
       "categoria": "SOCIALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -30,7 +30,7 @@
     },
     {
       "id": "soc-04",
-      "testo": "Oggi parla per primo con chi stavi per evitare.",
+      "testo": "Oggi fai tu il primo passo con chi stavi per evitare.",
       "categoria": "SOCIALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -39,7 +39,7 @@
     },
     {
       "id": "soc-05",
-      "testo": "Oggi chiedi a qualcuno che lavoro faceva suo padre.",
+      "testo": "Oggi chiedi a qualcuno che lavoro facevano i suoi genitori.",
       "categoria": "SOCIALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -75,7 +75,7 @@
     },
     {
       "id": "soc-09",
-      "testo": "Oggi dì di no a una cosa che avresti accettato per inerzia.",
+      "testo": "Oggi di' di no a una cosa che avresti accettato per inerzia.",
       "categoria": "SOCIALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -93,7 +93,7 @@
     },
     {
       "id": "soc-11",
-      "testo": "Oggi mangia con qualcuno invece che da solo.",
+      "testo": "Oggi mangia in compagnia, non per conto tuo.",
       "categoria": "SOCIALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -210,7 +210,7 @@
     },
     {
       "id": "soc-24",
-      "testo": "Oggi dì a qualcuno una cosa che apprezzi e non hai detto.",
+      "testo": "Oggi di' a qualcuno una cosa che apprezzi e non hai mai detto.",
       "categoria": "SOCIALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -304,7 +304,7 @@
     },
     {
       "id": "fis-04",
-      "testo": "Oggi allunga la strada di casa di dieci minuti.",
+      "testo": "Oggi allunga di dieci minuti la strada verso casa.",
       "categoria": "FISICO",
       "livello": "OSSERVABILE",
       "contesto": "QUALSIASI",
@@ -410,7 +410,7 @@
     },
     {
       "id": "fis-14",
-      "testo": "Oggi stiracchiati ogni volta che ti accorgi di essere fermo.",
+      "testo": "Oggi stiracchiati ogni volta che ti accorgi di non muoverti da un po'.",
       "categoria": "FISICO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -492,7 +492,7 @@
     },
     {
       "id": "fis-22",
-      "testo": "Oggi fai il doppio dei passi che fai di solito.",
+      "testo": "Oggi raddoppia i passi che fai di solito.",
       "categoria": "FISICO",
       "livello": "OSSERVABILE",
       "contesto": "QUALSIASI",
@@ -610,7 +610,7 @@
     },
     {
       "id": "dig-04",
-      "testo": "Oggi rispondi a un messaggio solo quando puoi farlo bene.",
+      "testo": "Oggi rispondi a un messaggio solo quando puoi dedicargli attenzione.",
       "categoria": "DIGITALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -700,7 +700,7 @@
     },
     {
       "id": "dig-14",
-      "testo": "Oggi spegni il telefono per un'ora e dì a qualcuno quando.",
+      "testo": "Oggi spegni il telefono per un'ora, e avvisa prima qualcuno.",
       "categoria": "DIGITALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -817,7 +817,7 @@
     },
     {
       "id": "dig-27",
-      "testo": "Oggi non mettere nessun segno di approvazione a nessuno.",
+      "testo": "Oggi non mettere segni di approvazione a nessuno.",
       "categoria": "DIGITALE",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -862,7 +862,7 @@
     },
     {
       "id": "cre-02",
-      "testo": "Oggi fotografa una cosa sola. Una. Poi basta.",
+      "testo": "Oggi fotografa una cosa sola, e nient'altro.",
       "categoria": "CREATIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -871,7 +871,7 @@
     },
     {
       "id": "cre-03",
-      "testo": "Oggi disegna un oggetto che hai davanti, male.",
+      "testo": "Oggi disegna male un oggetto che hai davanti.",
       "categoria": "CREATIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -907,7 +907,7 @@
     },
     {
       "id": "cre-07",
-      "testo": "Oggi canta qualcosa ad alta voce, da solo.",
+      "testo": "Oggi canta qualcosa ad alta voce, senza nessuno intorno.",
       "categoria": "CREATIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -1006,7 +1006,7 @@
     },
     {
       "id": "cre-18",
-      "testo": "Oggi prova una ricetta di un posto dove non sei stato.",
+      "testo": "Oggi prova una ricetta di un posto che non hai mai visitato.",
       "categoria": "CREATIVO",
       "livello": "DICHIARATA",
       "contesto": "FESTIVO",
@@ -1015,7 +1015,7 @@
     },
     {
       "id": "cre-19",
-      "testo": "Oggi disegna la pianta della casa dove sei cresciuto.",
+      "testo": "Oggi disegna la pianta della casa della tua infanzia.",
       "categoria": "CREATIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -1159,7 +1159,7 @@
     },
     {
       "id": "int-05",
-      "testo": "Oggi resta dieci minuti fermo senza fare niente.",
+      "testo": "Oggi resta dieci minuti senza fare niente.",
       "categoria": "INTROSPETTIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -1195,7 +1195,7 @@
     },
     {
       "id": "int-09",
-      "testo": "Oggi chiediti, una volta, se lo stai facendo per te.",
+      "testo": "Oggi chiediti, una volta, se quello che stai facendo lo fai per te.",
       "categoria": "INTROSPETTIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -1258,7 +1258,7 @@
     },
     {
       "id": "int-16",
-      "testo": "Oggi nota cosa ti ha fatto sorridere per primo.",
+      "testo": "Oggi nota la prima cosa che ti fa sorridere.",
       "categoria": "INTROSPETTIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -1339,7 +1339,7 @@
     },
     {
       "id": "int-25",
-      "testo": "Oggi chiediti chi ti manca, e basta.",
+      "testo": "Oggi chiediti chi ti manca, senza andare oltre.",
       "categoria": "INTROSPETTIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",
@@ -1357,7 +1357,7 @@
     },
     {
       "id": "int-27",
-      "testo": "Oggi resta sveglio dieci minuti in più, al buio, senza schermi.",
+      "testo": "Oggi ritarda di dieci minuti il sonno, al buio, senza schermi.",
       "categoria": "INTROSPETTIVO",
       "livello": "DICHIARATA",
       "contesto": "QUALSIASI",

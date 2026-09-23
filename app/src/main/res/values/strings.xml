@@ -35,7 +35,7 @@
     <string name="non_attiva">non attiva</string>
     <string name="imp_nota">L\'osservazione automatica usa il contapassi del telefono, due letture al giorno. Nulla lascia il dispositivo.</string>
 
-    <string name="osservazione_spiegazione">Per osservare da solo le regole legate al movimento, il telefono legge il contapassi due volte al giorno: la mattina e la sera. Nient\'altro, e niente esce dal dispositivo.</string>
+    <string name="osservazione_spiegazione">Il telefono legge il contapassi due volte al giorno, la mattina e la sera, per valutare da sé le regole legate al movimento. Nient\'altro, e niente esce dal dispositivo.</string>
     <string name="non_ora">Non ora</string>
     <string name="continua">Continua</string>
 
