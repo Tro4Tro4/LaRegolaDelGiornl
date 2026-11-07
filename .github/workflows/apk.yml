@@ -1,0 +1,60 @@
+# Compila l'APK da condividere.
+#
+# Prima della build passa dal cancello: test di :core, coerenza dei documenti
+# e catalogo rigenerato identico a quello committato (gli artefatti di
+# strumenti/regole.py non si modificano a mano).
+#
+# L'APK e' di debug: firmato con la chiave di debug, si installa su qualsiasi
+# telefono con "origini sconosciute" abilitate. Una release firmata richiede
+# un keystore, che non sta nel repository.
+name: APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+
+permissions:
+  contents: write   # solo per allegare l'APK alle release sui tag v*
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Test di :core
+        run: ./gradlew :core:test
+
+      - name: Coerenza
+        run: python3 strumenti/coerenza.py
+
+      - name: Catalogo allineato alla sorgente
+        run: |
+          python3 strumenti/regole.py
+          git diff --exit-code -- app/src/main/assets/regole.json core/src/test
+
+      - name: Compila l'APK di debug
+        run: ./gradlew :app:assembleDebug
+
+      - name: Rinomina
+        run: cp app/build/outputs/apk/debug/app-debug.apk "LaRegolaDelGiorno-${GITHUB_SHA::7}.apk"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LaRegolaDelGiorno-apk
+          path: LaRegolaDelGiorno-*.apk
+
+      - name: Allega alla release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: LaRegolaDelGiorno-*.apk
