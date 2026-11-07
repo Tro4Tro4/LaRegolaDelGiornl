@@ -11,12 +11,17 @@ name: APK
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag della release da creare (es. v1.0); vuoto = solo artefatto"
+        required: false
+        default: ""
   push:
     branches: ["**"]
     tags: ["v*"]
 
 permissions:
-  contents: write   # solo per allegare l'APK alle release sui tag v*
+  contents: write   # solo per creare la release e allegarvi l'APK
 
 jobs:
   apk:
@@ -53,8 +58,14 @@ jobs:
           name: LaRegolaDelGiorno-apk
           path: LaRegolaDelGiorno-*.apk
 
+      # Due strade per la release: un tag v* pubblicato a mano, oppure
+      # l'avvio manuale con l'input "tag", che crea tag e release sul commit
+      # appena verificato dal cancello.
       - name: Allega alla release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/v') || inputs.tag != ''
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          target_commitish: ${{ github.sha }}
+          name: La Regola del Giorno ${{ inputs.tag || github.ref_name }}
           files: LaRegolaDelGiorno-*.apk
